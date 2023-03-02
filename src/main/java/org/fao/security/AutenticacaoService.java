@@ -20,6 +20,12 @@ public class AutenticacaoService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		Optional<Utilizador> usuarioLogado= repository.findByNomeLogin(username);
+		
+		if(usuarioLogado.get().isEstado() == false){
+			throw new UsernameNotFoundException("Utilizador desativo");
+			
+		}
+		
 		if(usuarioLogado.isPresent()) {
 			return usuarioLogado.get();
 		}

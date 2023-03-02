@@ -10,8 +10,8 @@ public interface EstoqueService {
 
 	public Estoque gravar(Estoque estoque);
 	public Estoque buscarOuFalhar(Long estoqueId);
-	public Page<Estoque> listarVendidas(Pageable paginacao);
-	public Page<Estoque> listarCanceladas(Pageable paginacao);
+	public Page<Estoque> listarVendidas(Pageable paginacao,String utilizador);
+	public Page<Estoque> listarCanceladas(Pageable paginacao, String utilizador);
 		
 	public Estoque cancel(Estoque estoque);
 	

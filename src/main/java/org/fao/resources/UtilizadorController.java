@@ -8,6 +8,7 @@ import org.fao.model.exception.NegocioException;
 import org.fao.model.exception.UtilizadorNaoEncontradoException;
 import org.fao.resources.DTO.UtilizadorDTO;
 import org.fao.resources.form.EditarSenha;
+import org.fao.resources.form.EditarUsuario;
 import org.fao.service.UtlizadorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,14 +60,15 @@ public class UtilizadorController {
 		}
 	}
 
-	@PutMapping("/{utilizdorId}")
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public Utilizador atualizar(@PathVariable Long utilizdorId, @RequestBody Utilizador utilizador) {
+	//@PreAuthorize("hasAnyAuthority('Editar_Usuarios')")
+	public Utilizador atualizar(@PathVariable Long id, @RequestBody EditarUsuario editarUsuario) {
 		try {
-			Utilizador clienteActual = service.buscarOuFalhar(utilizdorId);
-			BeanUtils.copyProperties(utilizador, clienteActual);
-			return service.gravar(clienteActual);
-		} catch (CategoriasNaoEncontradoException e) {
+			Utilizador usuariooAtual = service.buscarOuFalhar(id);
+			BeanUtils.copyProperties(editarUsuario, usuariooAtual);
+			return service.editar(id, editarUsuario);
+		} catch (UtilizadorNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}

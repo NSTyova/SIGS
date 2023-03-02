@@ -8,12 +8,12 @@ import org.springframework.data.domain.Page;
 public class UtilizadorDTO {
 
 	private Long id;
-	private String username;
+	private String nomeLogin;
 	private String name;
 	private LocalDate dataRegister;
 	public UtilizadorDTO (Utilizador u) {
 		this.id=u.getId();
-		this.username=u.getUsername();
+		this.nomeLogin=u.getNomeLogin();
 		this.name=u.getName();
 		this.dataRegister=u.getDataRegister();
 		}
@@ -29,11 +29,11 @@ public class UtilizadorDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public String getNomeLogin() {
+		return nomeLogin;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setNomeLogin(String nomeLogin) {
+		this.nomeLogin = nomeLogin;
 	}
 	public String getName() {
 		return name;

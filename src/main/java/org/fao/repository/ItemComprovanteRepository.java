@@ -38,7 +38,7 @@ public interface ItemComprovanteRepository  extends JpaRepository<ItemComprovant
 				+ " INNER JOIN tb_comprovante c ON (ic.comprovante_id=c.id_comprovante) "
 				+ " INNER JOIN tb_estoque e ON (c.estoque=e.id) "
 				+ " INNER JOIN tb_utilizador u ON (e.utilizador =u.id) "
-				+ " where  "
+				+ " where e.estado='ENTREGUE' and "
 				+ " e.data_registro= CONVERT(date, GETDATE()) and"
 				+ "  u.nome_Login like :utilizador "
 				+ " GROUP BY p.nome ",nativeQuery = true )

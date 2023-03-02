@@ -1,5 +1,7 @@
 package org.fao.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +20,14 @@ public class Unidade {
 	private String nome;
 	@Column(name = "codigo", nullable = false, unique = true)
 	private String codigo;
+	@Column(name = "estado_unidade")
+	private boolean estado;
+	@Column(name = "data_registro")
+	private LocalDate dataRegrito;
+	@Column(name = "data_Inicio")
+	private LocalDate dataInicio;
+	@Column(name = "data_expiracao")
+	private LocalDate dataExpeiracao;
 	public Long getId() {
 		return id;
 	}

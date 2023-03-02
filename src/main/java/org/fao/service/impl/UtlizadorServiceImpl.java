@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.fao.model.Utilizador;
 import org.fao.model.exception.CategoriasNaoEncontradoException;
 import org.fao.repository.UtilizadorRepository;
+import org.fao.resources.form.EditarUsuario;
 import org.fao.service.UtlizadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -57,4 +58,15 @@ public class UtlizadorServiceImpl implements UtlizadorService{
 		utilizador.setSenha(passwordEncoder.encode(novaSenha));
 	}
 
+	@Override
+	public Utilizador editar(Long id, EditarUsuario usuarioEditar) {
+		Utilizador usuario =repository.getById(id);
+		usuarioEditar.setName(usuario.getName());
+		usuarioEditar.setNomeLogin(usuario.getNomeLogin());
+		//usuarioEditar.setEstado(usuario.isEstado());
+		// fazer uma especifico para editar o perfil
+		//usuarioEditar.setPerfis(usuario.getPerfis());
+		
+		return repository.save(usuario);
+	}
 }

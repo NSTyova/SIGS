@@ -4,9 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.fao.model.Comprovante;
 import org.fao.model.Estoque;
-import org.fao.model.ItemComprovante;
 import org.fao.model.Utilizador;
 import org.fao.model.exception.NegocioException;
 import org.fao.model.exception.ProductosNaoEncontradoException;
@@ -49,15 +47,17 @@ public class EstoqueController {
 
 
 	@GetMapping
-	public Page<EstoqueDTO> listar( @RequestParam int pagina, @RequestParam int qtd) {
+	public Page<EstoqueDTO> listar( @RequestParam int pagina, @RequestParam int qtd, @AuthenticationPrincipal Utilizador logado) {
+			String utilizador = logado.getNomeLogin();
 			Pageable paginacao = PageRequest.of(pagina, qtd);
-			Page<Estoque> estoque = service.listarVendidas(paginacao);
+			Page<Estoque> estoque = service.listarVendidas(paginacao,utilizador );
 			return EstoqueDTO.convert(estoque);
 	}
 	@GetMapping(value = "/cancelados")
-	public Page<EstoqueDTO> listarCanceladas( @RequestParam int pagina, @RequestParam int qtd) {
+	public Page<EstoqueDTO> listarCanceladas( @RequestParam int pagina, @RequestParam int qtd,  @AuthenticationPrincipal Utilizador logado) {
+			String utilizador = logado.getNomeLogin();
 			Pageable paginacao = PageRequest.of(pagina, qtd);
-			Page<Estoque> estoque = service.listarCanceladas(paginacao);
+			Page<Estoque> estoque = service.listarCanceladas(paginacao, utilizador);
 			return EstoqueDTO.convert(estoque);
 	}
 

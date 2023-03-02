@@ -32,6 +32,7 @@ public class AutenticacaoController {
 
 	@PostMapping
 	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid LoginForm form, @AuthenticationPrincipal Utilizador logado){
+		// VER AQUI UMA LOGICA QUE QUANDO DAS DATAS FOREM DIFERENTE NAO LOGA BUSCAR SOMENTE DADOS DAS UNIDADES TRUE
 		UsernamePasswordAuthenticationToken dadosLogin=form.converter();
 		try {
 			Authentication authenticate = authManager.authenticate(dadosLogin);

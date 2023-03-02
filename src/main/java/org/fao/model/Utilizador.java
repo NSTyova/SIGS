@@ -30,6 +30,8 @@ public class Utilizador implements UserDetails{
 	private String senha;
 	private String name;
 	private LocalDate dataRegister=LocalDate.now();
+	@Column(name = "estado_utilizador")
+	private boolean estado=true;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Permissao> permissoes = new ArrayList<>();
@@ -103,6 +105,12 @@ public class Utilizador implements UserDetails{
 	}
 	public void setPermissoes(List<Permissao> permissoes) {
 		this.permissoes = permissoes;
+	}
+	public boolean isEstado() {
+		return estado;
+	}
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 	
 	

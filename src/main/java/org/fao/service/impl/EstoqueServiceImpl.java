@@ -69,13 +69,13 @@ public class EstoqueServiceImpl implements EstoqueService {
 	}
 
 	@Override
-	public Page<Estoque> listarVendidas(Pageable paginacao) {
-		return repository.buscarPorStatusVendido(paginacao);
+	public Page<Estoque> listarVendidas(Pageable paginacao, String utilizador) {
+		return repository.buscarPorStatusVendido(paginacao, utilizador);
 	}
 	
 	@Override
-	public Page<Estoque> listarCanceladas(Pageable paginacao) {
-		return repository.buscarPorStatusCancelado(paginacao);
+	public Page<Estoque> listarCanceladas(Pageable paginacao, String utilizador) {
+		return repository.buscarPorStatusCancelado(paginacao, utilizador);
 	}
 
 	@Override
