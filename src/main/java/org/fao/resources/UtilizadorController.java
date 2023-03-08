@@ -9,7 +9,7 @@ import org.fao.model.exception.UtilizadorNaoEncontradoException;
 import org.fao.resources.DTO.UtilizadorDTO;
 import org.fao.resources.form.EditarSenha;
 import org.fao.resources.form.EditarUsuario;
-import org.fao.service.UtlizadorService;
+import org.fao.service.UtilizadorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UtilizadorController {
 
 	@Autowired
-	private UtlizadorService service;
+	private UtilizadorService service;
 
 	@GetMapping
 	public Page<UtilizadorDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,

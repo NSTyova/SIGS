@@ -1,12 +1,14 @@
 package org.fao.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.fao.model.Utilizador;
 import org.fao.model.exception.CategoriasNaoEncontradoException;
 import org.fao.repository.UtilizadorRepository;
 import org.fao.resources.form.EditarUsuario;
-import org.fao.service.UtlizadorService;
+import org.fao.service.UtilizadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UtlizadorServiceImpl implements UtlizadorService{
+public class UtlizadorServiceImpl implements UtilizadorService{
 	
 	@Autowired
 	private UtilizadorRepository repository;
@@ -68,5 +70,11 @@ public class UtlizadorServiceImpl implements UtlizadorService{
 		//usuarioEditar.setPerfis(usuario.getPerfis());
 		
 		return repository.save(usuario);
+	}
+
+	@Override
+	public List<Utilizador> lista() {
+		// TODO Auto-generated method stub
+		return repository.findAll();
 	}
 }

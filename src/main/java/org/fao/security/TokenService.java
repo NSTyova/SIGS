@@ -30,7 +30,7 @@ public class TokenService {
 			Date dateExpiration = new Date(hoje.getTime() + Long.parseLong(expiration));
 			
 			return Jwts.builder()
-					.setIssuer("Plataforma ECA")
+					.setIssuer("Sistema de Gestão")
 					//.setSubject(logado.getPerfis().toString())
 					.setSubject(logado.getId().toString())
 					//.setAudience(logado.getNome())

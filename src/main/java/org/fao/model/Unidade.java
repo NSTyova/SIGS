@@ -21,11 +21,11 @@ public class Unidade {
 	@Column(name = "codigo", nullable = false, unique = true)
 	private String codigo;
 	@Column(name = "estado_unidade")
-	private boolean estado;
+	private boolean estado = true;
 	@Column(name = "data_registro")
-	private LocalDate dataRegrito;
+	private LocalDate dataRegrito = LocalDate.now();
 	@Column(name = "data_Inicio")
-	private LocalDate dataInicio;
+	private LocalDate dataInicio = LocalDate.now();;
 	@Column(name = "data_expiracao")
 	private LocalDate dataExpeiracao;
 	public Long getId() {

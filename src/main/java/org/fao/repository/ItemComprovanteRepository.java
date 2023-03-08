@@ -62,4 +62,16 @@ public interface ItemComprovanteRepository  extends JpaRepository<ItemComprovant
 				+ "WHERE u.nome_Login like :utilizador and"
 				+ " e.data_registro= CONVERT(date, GETDATE()) ", nativeQuery = true)		
 		CardsSaidaEntradaPaciente cards(String utilizador);
+		
+		/*
+		CREATE PROCEDURE alterar_estado
+		AS
+		BEGIN
+		    UPDATE u 
+		    SET u.estado_utilizador = 0
+		    FROM tb_utilizador u
+		    INNER JOIN tb_unidade ud ON u.unidades = ud.id
+		    WHERE  ud.data_expiracao <= CONVERT (date, GETDATE())
+		END
+		;*/
 }

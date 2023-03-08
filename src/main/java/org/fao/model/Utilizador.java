@@ -11,7 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -32,13 +34,16 @@ public class Utilizador implements UserDetails{
 	private LocalDate dataRegister=LocalDate.now();
 	@Column(name = "estado_utilizador")
 	private boolean estado=true;
+	@ManyToOne
+	@JoinColumn(name = "unidadeS")
+	private  Unidade unidade;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Permissao> permissoes = new ArrayList<>();
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.permissoes;
 	}
 	@Override
 	public String getPassword() {
@@ -113,7 +118,12 @@ public class Utilizador implements UserDetails{
 		this.estado = estado;
 	}
 	
-	
+	public Unidade getUnidade() {
+		return unidade;
+	}
+	 public void setUnidade(Unidade unidade) {
+		this.unidade = unidade;
+	}
 	
 	
 }
