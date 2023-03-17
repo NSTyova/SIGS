@@ -3,7 +3,7 @@ package org.fao.resources;
 import javax.validation.Valid;
 
 import org.fao.model.Utilizador;
-import org.fao.model.exception.CategoriasNaoEncontradoException;
+import org.fao.model.exception.TipoProductosNaoEncontradoException;
 import org.fao.model.exception.NegocioException;
 import org.fao.model.exception.UtilizadorNaoEncontradoException;
 import org.fao.resources.DTO.UtilizadorDTO;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/utilizador")
 @CrossOrigin("*")
 public class UtilizadorController {
-
+/*
 	@Autowired
 	private UtilizadorService service;
 
@@ -86,11 +86,11 @@ public class UtilizadorController {
 		try {
 			Utilizador usuarioAtual = service.buscarOuFalhar(id);
 			/*String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
-			usuario.setSenha(crypt);*/ 
+			usuario.setSenha(crypt);
 			BeanUtils.copyProperties(usuario, usuarioAtual);
 			return service.gravar(usuarioAtual);
 		} catch (UtilizadorNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage());
 		}
-	}
+	}*/
 }

@@ -19,29 +19,23 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Entity
-@Table(name = "TB_ESTOQUE")
 
 public class Estoque {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+/*
 	private Long id;
 	private Long quantidade;
 	@Column(name = "data_registro")
 	private LocalDate dataRegistro=LocalDate.now();
-	@ManyToOne
-	@JoinColumn(name = "paciente_id")
-	private Paciente paciente;
-	@ManyToMany(mappedBy = "estoque", cascade = CascadeType.ALL)
+	
+	private Servicos paciente;
+	//@ManyToMany(mappedBy = "estoque", cascade = CascadeType.ALL)
 	// PERMITE USAR A CLASSE SEM NECESSARIAMENTE TER DE PASSAR O JSON DELA
-		@JsonBackReference("role")
+	//	@JsonBackReference("role")
 	private List<Comprovante> comprovantes = new ArrayList<Comprovante>();
-	@Enumerated(EnumType.STRING)
+	//@Enumerated(EnumType.STRING)
 	private Estado estado = Estado.ENTREGUE;
 	
-	@ManyToOne
-	@JoinColumn(name = "utilizador")
+	
 	private Utilizador utilizador;
 	
 	public Long getId() {
@@ -62,10 +56,10 @@ public class Estoque {
 	public void setDataRegistro(LocalDate dataRegistro) {
 		this.dataRegistro = dataRegistro;
 	}
-	public Paciente getPaciente() {
+	public Servicos getPaciente() {
 		return paciente;
 	}
-	public void setPaciente(Paciente paciente) {
+	public void setPaciente(Servicos paciente) {
 		this.paciente = paciente;
 	}
 	public List<Comprovante> getComprovantes() {
@@ -87,5 +81,5 @@ public class Estoque {
 	
 	public void setUtilizador(Utilizador utilizador) {
 		this.utilizador = utilizador;
-	}
+	}*/
 }

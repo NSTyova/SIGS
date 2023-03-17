@@ -19,7 +19,7 @@ public class EditarUsuario {
 	public EditarUsuario (Utilizador usuario) {
 		this.id=usuario.getId();
 		this.name=usuario.getName();
-		this.nomeLogin=usuario.getNomeLogin();
+		//this.nomeLogin=usuario.getNomeLogin();
 		//this.perfis=usuario.getPerfis();
 	}
 

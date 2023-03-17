@@ -6,9 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface EstoqueRepository extends JpaRepository<Estoque, Long>{
+public interface EstoqueRepository {
 	
-	@Query("SELECT e FROM Estoque e WHERE e.estado='ENTREGUE'"
+	/*@Query("SELECT e FROM Estoque e WHERE e.estado='ENTREGUE'"
 			+ " and e.utilizador.nomeLogin like :utilizador "
 			+ " and e.dataRegistro= CONVERT (date, GETDATE()) ")
 	Page<Estoque> buscarPorStatusVendido(Pageable pageable, String utilizador);
@@ -16,5 +16,5 @@ public interface EstoqueRepository extends JpaRepository<Estoque, Long>{
 	@Query("SELECT e FROM Estoque e WHERE e.estado='CANCELADA' "
 			+ " and e.utilizador.nomeLogin like :utilizador "
 			+ " and e.dataRegistro= CONVERT (date, GETDATE()) ")
-	Page<Estoque> buscarPorStatusCancelado(Pageable pageable, String utilizador);
+	Page<Estoque> buscarPorStatusCancelado(Pageable pageable, String utilizador);*/
 }

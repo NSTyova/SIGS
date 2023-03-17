@@ -1,27 +1,18 @@
 package org.fao.service.impl.dashProjections;
 
-import java.util.List;
-
-import org.fao.projections.CardsSaidaEntradaPaciente;
-import org.fao.projections.ProductoEntregeCancelados;
-import org.fao.projections.ProductosCategorias;
-import org.fao.projections.ProductosQTDSaidaDia;
-import org.fao.repository.ItemComprovanteRepository;
-import org.fao.repository.ProductosRepository;
 import org.fao.service.dash.DashGraficaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DashGraficoImpl implements DashGraficaService {
-
+/*
 	@Autowired
 	private ItemComprovanteRepository itens;
 
 	@Autowired
 	private ProductosRepository productos;
 
-	@Override
+	/*@Override
 	public List<ProductoEntregeCancelados> productos(String utilizador) {
 		return itens.productos(utilizador);
 	}

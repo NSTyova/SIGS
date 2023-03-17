@@ -71,12 +71,7 @@ public class ProductosController {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param id
-	 * @param productos dto que contem os atributos que devem ser  alterados
-	 * @return
-	 */
+	
 	@PutMapping("/editar/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public Productos alterarQTD(@PathVariable Long id, @RequestBody ProductoUpdate productos) {
@@ -84,9 +79,9 @@ public class ProductosController {
 			
 			Productos productoActual = service.buscarOuFalhar(id);
 			// ESTE CAMPO PEGA A QUANTIDADE DO BANCO E SOMA COM A QUANTIDADE QUE VEM A LISTA
-			productoActual.setQuantidade(productoActual.getQuantidade() + productos.getQtd());
+			//productoActual.setQuantidade(productoActual.getQuantidade() + productos.getQtd());
 			// ESTA CAMPO PEGA O RESGIRO DO DTO E MANTEM O MESMO DO BANCO
-			productos.setDataRegistro(productoActual.getDataRegistro());
+			//productos.setDataRegistro(productoActual.getDataRegistro());
 			BeanUtils.copyProperties(productos, productoActual);
 			return  service.gravar(productoActual);
 		} catch (ProductosNaoEncontradoException e) {

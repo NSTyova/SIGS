@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EstoqueServiceImpl implements EstoqueService {
-
+/*
 	@Autowired
 	private EstoqueRepository repository;
 
@@ -32,7 +32,7 @@ public class EstoqueServiceImpl implements EstoqueService {
 
 	@Override
 	public Estoque gravar(Estoque estoque) {
-
+/*
 		// USANDO LAMBDA DO JAVA 8 QUANDO FOR UMA LINHA
 		List<Comprovante> f =estoque.getComprovantes();
 		f.forEach(cp -> cp.setEstoque(estoque));
@@ -98,6 +98,6 @@ public class EstoqueServiceImpl implements EstoqueService {
 		estoque.setEstado(Estado.CANCELADA);
 		return repository.save(estoque);
 	}
-
+*/
 
 }

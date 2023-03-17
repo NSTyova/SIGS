@@ -8,7 +8,7 @@ import org.fao.model.Estoque;
 import org.springframework.data.domain.Page;
 
 public class EstoqueDTO {
-
+/*
 	private Long id;
 	private BigDecimal total;
 	//private String usuario;
@@ -22,9 +22,7 @@ public class EstoqueDTO {
 	
 	public EstoqueDTO (Estoque estoque) {
 		this.id=estoque.getId();
-		this.paciente=estoque.getPaciente().getNome();
 		this.dataRegistro=estoque.getDataRegistro();
-		this.pacienteBilhete=estoque.getPaciente().getBilhete();
 		this.estado=estoque.getEstado();
 		
 	}
@@ -69,6 +67,6 @@ public class EstoqueDTO {
 	public Estado getEstado() {
 		return estado;
 	}
-
+*/
 	
 }

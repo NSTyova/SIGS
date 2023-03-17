@@ -2,10 +2,10 @@ package org.fao.repository;
 
 import java.util.Optional;
 
-import org.fao.model.Paciente;
+import org.fao.model.Servicos;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PacienteRepository extends JpaRepository<Paciente, Long>{
+public interface PacienteRepository {
 
-	Optional<Paciente> findByBilhete(String bilhete);
+	//Optional<Servicos> findByBilhete(String bilhete);
 }

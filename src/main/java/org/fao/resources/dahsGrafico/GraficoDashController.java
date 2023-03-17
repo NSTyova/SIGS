@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 public class GraficoDashController {
 
-	@Autowired
+	/*@Autowired
 	private DashGraficaService dashGraficaService;
 	
 	@GetMapping

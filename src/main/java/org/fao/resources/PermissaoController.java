@@ -3,7 +3,7 @@ package org.fao.resources;
 import javax.validation.Valid;
 
 import org.fao.model.Permissao;
-import org.fao.model.exception.CategoriasNaoEncontradoException;
+import org.fao.model.exception.TipoProductosNaoEncontradoException;
 import org.fao.model.exception.NegocioException;
 import org.fao.resources.DTO.PermissaoDTO;
 import org.fao.service.PermissaoService;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 public class PermissaoController {
 
-	@Autowired
+	/*@Autowired
 	private PermissaoService service;
 
 	@GetMapping
@@ -72,5 +72,5 @@ public class PermissaoController {
 	@GetMapping("/{categoriasId}")
 	public Permissao buscar(@PathVariable Long permissaoId) {
 		return service.buscarOuFalhar(permissaoId);
-	}
+	}*/
 }

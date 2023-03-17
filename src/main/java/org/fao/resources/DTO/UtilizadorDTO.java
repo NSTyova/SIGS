@@ -13,7 +13,7 @@ public class UtilizadorDTO {
 	private LocalDate dataRegister;
 	public UtilizadorDTO (Utilizador u) {
 		this.id=u.getId();
-		this.nomeLogin=u.getNomeLogin();
+		//this.nomeLogin=u.getNomeLogin();
 		this.name=u.getName();
 		this.dataRegister=u.getDataRegister();
 		}

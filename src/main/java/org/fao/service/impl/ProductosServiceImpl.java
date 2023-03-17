@@ -35,17 +35,16 @@ public class ProductosServiceImpl implements ProductosService {
 
 	@Override
 	public Page<Productos> buscarPorCodigo(Pageable paginacao, String nome) {
-		return repository.findByCodigo(paginacao, nome);
+		return null;//repository.findByCodigo(paginacao, nome);
 				
 	}
 
 
 	@Override
 	public Optional<Productos> buscarCodigo(String codigo) {
-		return repository.findByCodigo(codigo);
+		return null;
+		//return repository.findByCodigo(codigo);
 	}
-
-
 
 
 

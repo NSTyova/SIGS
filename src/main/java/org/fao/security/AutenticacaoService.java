@@ -19,7 +19,7 @@ public class AutenticacaoService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		Optional<Utilizador> usuarioLogado= repository.findByNomeLogin(username);
+		Optional<Utilizador> usuarioLogado= repository.findByEmail(username);
 		
 		if(usuarioLogado.get().isEstado() == false){
 			throw new UsernameNotFoundException("Utilizador desativo");
@@ -27,6 +27,7 @@ public class AutenticacaoService implements UserDetailsService{
 		}
 		
 		if(usuarioLogado.isPresent()) {
+			System.out.println(" "+ usuarioLogado.toString());
 			return usuarioLogado.get();
 		}
 		throw new UsernameNotFoundException("Dado invalidos");

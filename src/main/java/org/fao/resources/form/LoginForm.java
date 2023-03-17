@@ -4,28 +4,28 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 public class LoginForm {
 
-	private String nomeLogin;
+	private String email;
 	private String senha;
-	
-	public void setNomeLogin(String nomeLogin) {
-		this.nomeLogin = nomeLogin;
-	}
-	
-	public void setSenha(String senha) {
-		this.senha = senha;
+		
+	public String getEmail() {
+		return email;
 	}
 
-	public String getNomeLogin() {
-		return nomeLogin;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getSenha() {
 		return senha;
 	}
 
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public UsernamePasswordAuthenticationToken converter() {
 		// TODO Auto-generated method stub
-		return new UsernamePasswordAuthenticationToken(nomeLogin, senha);
+		return new UsernamePasswordAuthenticationToken(email, senha);
 	}
 	
 	

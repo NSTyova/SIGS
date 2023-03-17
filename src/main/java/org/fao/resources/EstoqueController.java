@@ -11,7 +11,7 @@ import org.fao.model.exception.ProductosNaoEncontradoException;
 import org.fao.resources.DTO.EstoqueDTO;
 import org.fao.resources.relatorios.JasperService;
 import org.fao.service.EstoqueService;
-import org.fao.service.form.CancelarEstoque;
+import org.fao.service.form.CancelarSolicitacao;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,7 +38,7 @@ import net.sf.jasperreports.engine.JRException;
 @CrossOrigin("*")
 public class EstoqueController {
 
-	@Autowired
+	/*@Autowired
 	private EstoqueService service;
 	
 	@Autowired
@@ -92,5 +92,5 @@ public class EstoqueController {
 		}
 
 	}
-
+*/
 }

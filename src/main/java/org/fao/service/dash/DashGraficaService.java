@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface DashGraficaService {
 
-	// PRODUCTOS ENTRADOS E CANCELADOS
+	/*// PRODUCTOS ENTRADOS E CANCELADOS
 	public List<ProductoEntregeCancelados> productos(String utilizador);
 	
 	
@@ -21,10 +21,10 @@ public interface DashGraficaService {
 	// PRODUCTOS MAIS SAIDOS POR DIA LIMITADO EM 10 LINHAS
 	List<ProductosQTDSaidaDia> limitados(String utlizador);
 	
-	/*// QUANTIDADE MEDICAMENTO LEVADOS POR PACIENTES DIARIAMENTE
-	List<QTDMedPaciente> qtdMedPaciente();*/
+	// QUANTIDADE MEDICAMENTO LEVADOS POR PACIENTES DIARIAMENTE
+	List<QTDMedPaciente> qtdMedPaciente()
 	
 	//CARDS SAIDAS, ENTREGUE, PACIENTES QUANTIDADE
-	CardsSaidaEntradaPaciente card(String utilizador);
+	CardsSaidaEntradaPaciente card(String utilizador);*/
 	
 }

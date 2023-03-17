@@ -28,15 +28,13 @@ public class Utilizador implements UserDetails{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(unique = true)
-	private String nomeLogin;
+	private String email;
 	private String senha;
 	private String name;
 	private LocalDate dataRegister=LocalDate.now();
 	@Column(name = "estado_utilizador")
 	private boolean estado=true;
-	@ManyToOne
-	@JoinColumn(name = "unidadeS")
-	private  Unidade unidade;
+
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Permissao> permissoes = new ArrayList<>();
@@ -53,7 +51,7 @@ public class Utilizador implements UserDetails{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.nomeLogin;
+		return this.email;
 	}
 	@Override
 	public boolean isAccountNonExpired() {
@@ -81,11 +79,12 @@ public class Utilizador implements UserDetails{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNomeLogin() {
-		return nomeLogin;
+	
+	public String getEmail() {
+		return email;
 	}
-	public void setNomeLogin(String nomeLogin) {
-		this.nomeLogin = nomeLogin;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getSenha() {
 		return senha;
@@ -118,12 +117,5 @@ public class Utilizador implements UserDetails{
 		this.estado = estado;
 	}
 	
-	public Unidade getUnidade() {
-		return unidade;
-	}
-	 public void setUnidade(Unidade unidade) {
-		this.unidade = unidade;
-	}
-	
-	
+
 }
