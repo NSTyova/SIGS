@@ -113,4 +113,9 @@ public class SolicitacaoController {
 			throw new NegocioException(e.getMessage());
 		}
 	}
+	
+	@GetMapping("/{solicitacaoId}")
+	public Solicitacao buscar(@PathVariable Long solicitacaoId) {
+		return service.buscarOuFalhar(solicitacaoId);
+	}
 }

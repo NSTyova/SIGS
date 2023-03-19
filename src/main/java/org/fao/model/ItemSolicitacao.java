@@ -75,6 +75,12 @@ public class ItemSolicitacao {
 	public void setSolicitacao(Solicitacao solicitacao) {
 		this.solicitacao = solicitacao;
 	}
+	@Override
+	public String toString() {
+		return "ItemSolicitacao [id=" + id + ", gramas=" + gramas + ", quantidade=" + quantidade + ", visibidade="
+				+ visibidade + ", productos=" + productos + ", tipo=" + tipo + ", solicitacao=" + solicitacao + "]";
+	}
+	
 	
 	
 	

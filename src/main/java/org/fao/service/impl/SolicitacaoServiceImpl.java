@@ -8,6 +8,7 @@ import org.fao.model.Utilizador;
 import org.fao.model.exception.EntradasNaoEncontradoException;
 import org.fao.model.exception.SolicitacaoNaoEncontradoException;
 import org.fao.repository.SolicitacaoRepository;
+import org.fao.resources.DTO.SolicitacaoDTO;
 import org.fao.service.SolicitacaoService;
 import org.fao.service.form.EditarSolicitacao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,11 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	@Override
 	public Solicitacao editar(Long id, EditarSolicitacao solicitacao) {
 		Solicitacao s =repository.getById(id);
+		// GRAVAR O ID QUE VEM NA ENTRADA NO ITEM-SOLICIATACAO
+		List<ItemSolicitacao> iten = solicitacao.getItem();
+		iten.forEach(so -> so.setSolicitacao(s));
 		solicitacao.setEstado(s.getEstado());
+		solicitacao.setItem(s.getItem());
 		
 		return repository.save(s);
 	}

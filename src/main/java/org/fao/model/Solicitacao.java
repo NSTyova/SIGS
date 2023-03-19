@@ -43,6 +43,7 @@ public class Solicitacao {
 	@JsonBackReference("role")
 	private List<ItemSolicitacao> item = new ArrayList<ItemSolicitacao>();
 	
+	
 	public Long getId() {
 		return id;
 	}
