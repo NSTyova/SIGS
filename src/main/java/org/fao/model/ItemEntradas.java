@@ -117,4 +117,17 @@ public class ItemEntradas {
 	public void setEntradas(Entradas entradas) {
 		this.entradas = entradas;
 	}
+	public Productos getProductos() {
+		return productos;
+	}
+	public void setProductos(Productos productos) {
+		this.productos = productos;
+	}
+	public boolean isVisibidade() {
+		return visibidade;
+	}
+	public void setVisibidade(boolean visibidade) {
+		this.visibidade = visibidade;
+	}
+	
 }

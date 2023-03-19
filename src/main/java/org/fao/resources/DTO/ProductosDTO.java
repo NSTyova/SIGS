@@ -11,16 +11,10 @@ public class ProductosDTO {
 
 	private Long id;
 	private String nome;
-	private String origem;
-	private TipoProductos categoria;
-	private LocalDate dataFabrico;
-	private LocalDate dataValidade;
-	private Long quantidade;
-	private String codigo;
-	private boolean estado;
-	private Fornecedores fornecedor;
 
 	public ProductosDTO(Productos productos) {
+		this.id=productos.getId();
+		this.nome=productos.getNome();
 		
 	}
 
@@ -32,8 +26,6 @@ public class ProductosDTO {
 		return productos.map(ProductosDTO::new);
 	}
 
-	
-
 	public Long getId() {
 		return id;
 	}
@@ -41,38 +33,4 @@ public class ProductosDTO {
 	public String getNome() {
 		return nome;
 	}
-
-	public String getOrigem() {
-		return origem;
-	}
-
-	public TipoProductos getCategoria() {
-		return categoria;
-	}
-
-	public LocalDate getDataFabrico() {
-		return dataFabrico;
-	}
-
-	public LocalDate getDataValidade() {
-		return dataValidade;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public boolean isEstado() {
-		return estado;
-	}
-
-	public Long getQuantidade() {
-		return quantidade;
-	}
-
-	public Fornecedores getFornecedor() {
-		return fornecedor;
-	}
-
-	
 }

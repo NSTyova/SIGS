@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.fao.model.Utilizador;
 import org.fao.model.exception.TipoProductosNaoEncontradoException;
+import org.fao.model.exception.UtilizadorNaoEncontradoException;
 import org.fao.repository.UtilizadorRepository;
 import org.fao.resources.form.EditarUsuario;
 import org.fao.service.UtilizadorService;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UtlizadorServiceImpl implements UtilizadorService{
-	/*
+	
 	@Autowired
 	private UtilizadorRepository repository;
 	
@@ -33,7 +34,7 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 	@Override
 	public Utilizador buscarOuFalhar(Long uId) {
 		// TODO Auto-generated method stub
-		return repository.findById(uId).orElseThrow(() -> new CategoriasNaoEncontradoException(uId));
+		return repository.findById(uId).orElseThrow(() -> new UtilizadorNaoEncontradoException(uId));
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 	public Utilizador editar(Long id, EditarUsuario usuarioEditar) {
 		Utilizador usuario =repository.getById(id);
 		usuarioEditar.setName(usuario.getName());
-		usuarioEditar.setNomeLogin(usuario.getNomeLogin());
+		usuarioEditar.setNomeLogin(usuario.getEmail());
 		//usuarioEditar.setEstado(usuario.isEstado());
 		// fazer uma especifico para editar o perfil
 		//usuarioEditar.setPerfis(usuario.getPerfis());
@@ -76,5 +77,5 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 	public List<Utilizador> lista() {
 		// TODO Auto-generated method stub
 		return repository.findAll();
-	}*/
+	}
 }

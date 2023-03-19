@@ -3,7 +3,6 @@ package org.fao.resources;
 import javax.validation.Valid;
 
 import org.fao.model.Utilizador;
-import org.fao.model.exception.TipoProductosNaoEncontradoException;
 import org.fao.model.exception.NegocioException;
 import org.fao.model.exception.UtilizadorNaoEncontradoException;
 import org.fao.resources.DTO.UtilizadorDTO;
@@ -16,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/utilizador")
 @CrossOrigin("*")
 public class UtilizadorController {
-/*
+
 	@Autowired
 	private UtilizadorService service;
 
@@ -55,7 +55,7 @@ public class UtilizadorController {
 	public Utilizador adicionar(@RequestBody @Valid Utilizador utilizador) {
 		try {
 			return service.gravar(utilizador);
-		} catch (CategoriasNaoEncontradoException e) {
+		} catch (UtilizadorNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}
@@ -85,12 +85,12 @@ public class UtilizadorController {
 			@RequestBody EditarSenha usuario) {
 		try {
 			Utilizador usuarioAtual = service.buscarOuFalhar(id);
-			/*String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
+			String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
 			usuario.setSenha(crypt);
 			BeanUtils.copyProperties(usuario, usuarioAtual);
 			return service.gravar(usuarioAtual);
 		} catch (UtilizadorNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage());
 		}
-	}*/
+	}
 }

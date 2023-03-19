@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "TB_ENTRADAS")
 public class Entradas {
@@ -23,21 +25,22 @@ public class Entradas {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private BigDecimal custo;
-	private LocalDate dataEntrada;
+	private LocalDate dataEntrada= LocalDate.now();
 	private String tipoEntrada;
-	private boolean visibidade;
+	private boolean visibidade = true;
 	
 	@ManyToOne
 	@JoinColumn(name = "utilizador")
 	private Utilizador utilizador;
 	@ManyToOne
 	@JoinColumn(name = "depisoto")
-	private Deposito depisoto;
+	private Deposito deposito;
 	@ManyToOne
 	@JoinColumn(name = "fornecedores")
 	private Fornecedores fornecedores;
 	
 	@ManyToMany(mappedBy = "entradas", cascade = CascadeType.ALL)
+	@JsonBackReference("role")
 	private List<ItemEntradas> iten = new ArrayList<ItemEntradas>();
 	
 	public Long getId() {
@@ -70,11 +73,11 @@ public class Entradas {
 	public void setUtilizador(Utilizador utilizador) {
 		this.utilizador = utilizador;
 	}
-	public Deposito getDepisoto() {
-		return depisoto;
+	public Deposito getDeposito() {
+		return deposito;
 	}
-	public void setDepisoto(Deposito depisoto) {
-		this.depisoto = depisoto;
+	public void setDepisoto(Deposito deposito) {
+		this.deposito = deposito;
 	}
 	public Fornecedores getFornecedores() {
 		return fornecedores;

@@ -23,9 +23,9 @@ public class Solicitacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private LocalDate dataSolicitacao;
-	private String estado;
-	private boolean visibidade;
+	private LocalDate dataSolicitacao= LocalDate.now();
+	private String estado = "Pendente";
+	private boolean visibidade = true;
 	@ManyToOne
 	@JoinColumn(name = "solicitante")
 	private Utilizador solicitante;

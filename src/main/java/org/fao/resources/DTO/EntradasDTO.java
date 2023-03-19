@@ -32,7 +32,7 @@ public class EntradasDTO {
 		this.dataEntrada=entradas.getDataEntrada();
 		this.tipoEntrada=entradas.getTipoEntrada();
 		this.utilizador=entradas.getUtilizador();
-		this.depisoto=entradas.getDepisoto();
+		this.depisoto=entradas.getDeposito();
 		this.fornecedores=entradas.getFornecedores();
 		this.iten=entradas.getIten();
 	}

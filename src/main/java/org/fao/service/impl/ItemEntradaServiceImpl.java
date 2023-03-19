@@ -2,6 +2,7 @@ package org.fao.service.impl;
 
 import org.fao.model.ItemEntradas;
 import org.fao.service.ItemEntradasService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItemEntradaServiceImpl implements ItemEntradasService{
 
+	
+	
+	
 	@Override
 	public ItemEntradas gravar(ItemEntradas itemEntradas) {
 		// TODO Auto-generated method stub
