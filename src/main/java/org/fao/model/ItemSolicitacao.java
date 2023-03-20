@@ -33,6 +33,7 @@ public class ItemSolicitacao {
 	@ManyToOne
 	@JoinColumn(name = "solicitacao")
 	private Solicitacao solicitacao;
+	
 	public Long getId() {
 		return id;
 	}
@@ -80,8 +81,6 @@ public class ItemSolicitacao {
 		return "ItemSolicitacao [id=" + id + ", gramas=" + gramas + ", quantidade=" + quantidade + ", visibidade="
 				+ visibidade + ", productos=" + productos + ", tipo=" + tipo + ", solicitacao=" + solicitacao + "]";
 	}
-	
-	
 	
 	
 	

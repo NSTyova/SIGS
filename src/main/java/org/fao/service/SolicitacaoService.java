@@ -12,7 +12,7 @@ public interface SolicitacaoService {
 
 	public Solicitacao gravar(Solicitacao solicitacao);
 	public Solicitacao buscarOuFalhar(Long solicitacaoId);
-	public Page<Solicitacao> listar(Pageable paginacao);
+	public Page<ItemSolicitacao> listar(Pageable paginacao);
 	public Page<Solicitacao>  buscarPorNome(Pageable paginacao,String nome);
 	public Solicitacao editar(Long id, EditarSolicitacao solicitacao);
 	public List<ItemSolicitacao> buscarPorId(List<Solicitacao> dto);

@@ -22,7 +22,7 @@ public class Transferencia {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private LocalDate dataTransferencia;
-	private boolean visibidade;
+	private boolean visibidade=true;
 	@ManyToOne
 	@JoinColumn(name = "entradas")
 	private Entradas entradas;

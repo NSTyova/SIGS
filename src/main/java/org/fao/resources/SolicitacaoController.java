@@ -2,7 +2,6 @@ package org.fao.resources;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +10,7 @@ import org.fao.model.Solicitacao;
 import org.fao.model.Utilizador;
 import org.fao.model.exception.NegocioException;
 import org.fao.model.exception.UtilizadorNaoEncontradoException;
+import org.fao.resources.DTO.ItemSolicitacaoDTO;
 import org.fao.resources.DTO.SolicitacaoDTO;
 import org.fao.resources.relatorios.JasperService;
 import org.fao.service.SolicitacaoService;
@@ -48,12 +48,12 @@ public class SolicitacaoController {
 	private JasperService serviceJ;
 	
 	@GetMapping
-	public Page<SolicitacaoDTO> listar( @RequestParam int pagina, @RequestParam int qtd, @AuthenticationPrincipal Utilizador logado) {
+	public Page<ItemSolicitacaoDTO> listar( @RequestParam int pagina, @RequestParam int qtd, @AuthenticationPrincipal Utilizador logado) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
 
 		
-			Page<Solicitacao> solicitacao = service.listar(paginacao);
-			return SolicitacaoDTO.convert(solicitacao);
+			Page<ItemSolicitacao> solicitacao = service.listar(paginacao);
+			return ItemSolicitacaoDTO.convert(solicitacao);
 		
 		
 	}

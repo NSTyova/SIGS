@@ -42,9 +42,9 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	}
 
 	@Override
-	public Page<Solicitacao> listar(Pageable paginacao) {
+	public Page<ItemSolicitacao> listar(Pageable paginacao) {
 		// TODO Auto-generated method stub
-		return repository.findAll(paginacao);
+		return itRepository.listar(paginacao);
 	}
 
 	@Override

@@ -34,6 +34,7 @@ public class ItemEntradas {
 	private String pratileira;
 	@Column(length = 50)
 	private String armario;
+	private boolean visibidade=true;
 	
 	@ManyToOne
 	@JoinColumn(name ="tipo")
@@ -44,7 +45,6 @@ public class ItemEntradas {
 	@ManyToOne
 	@JoinColumn(name ="productos")
 	private Productos productos;
-	private boolean visibidade;
 	public Long getId() {
 		return id;
 	}
