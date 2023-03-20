@@ -1,17 +1,17 @@
 package org.fao.resources;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.fao.model.Entradas;
+import org.fao.model.ItemSolicitacao;
 import org.fao.model.Solicitacao;
 import org.fao.model.Utilizador;
 import org.fao.model.exception.NegocioException;
 import org.fao.model.exception.UtilizadorNaoEncontradoException;
-import org.fao.resources.DTO.EntradasDTO;
 import org.fao.resources.DTO.SolicitacaoDTO;
-import org.fao.resources.form.EditarUsuario;
 import org.fao.resources.relatorios.JasperService;
 import org.fao.service.SolicitacaoService;
 import org.fao.service.form.CancelarSolicitacao;
@@ -115,7 +115,7 @@ public class SolicitacaoController {
 	}
 	
 	@GetMapping("/{solicitacaoId}")
-	public Solicitacao buscar(@PathVariable Long solicitacaoId) {
-		return service.buscarOuFalhar(solicitacaoId);
+	public List<ItemSolicitacao> buscar(@PathVariable List<Solicitacao> solicitacaoId) {
+		return service.buscarPorId(solicitacaoId);
 	}
 }

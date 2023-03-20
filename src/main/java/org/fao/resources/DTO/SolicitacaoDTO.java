@@ -18,24 +18,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class SolicitacaoDTO {
 
 	private Long id;
-	private List<ItemSolicitacao> item ;//= new ArrayList<ItemSolicitacao>();
-	private LocalDate dataSolicitacao;
-	private String estado;
-	private Utilizador solicitante;
-	private Utilizador aprovou;
-	private Servicos servicos;
-	private Utilizador utilizador;
+	private List<ItemSolicitacao> item ;
 	
 	
 	
 	public SolicitacaoDTO (Solicitacao solicitacao) {
 		this.id=solicitacao.getId();
-		this.dataSolicitacao=solicitacao.getDataSolicitacao();
-		this.solicitante=solicitacao.getSolicitante();
-		this.aprovou=solicitacao.getAprovou();
-		this.utilizador=solicitacao.getUtilizador();
-		this.estado=solicitacao.getEstado();
-		this.servicos=solicitacao.getServicos();
 		this.item=solicitacao.getItem();
 		
 	}
@@ -54,30 +42,5 @@ public class SolicitacaoDTO {
 		return id;
 	}
 
-	public LocalDate getDataSolicitacao() {
-		return dataSolicitacao;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public Utilizador getSolicitante() {
-		return solicitante;
-	}
-
-	public Utilizador getAprovou() {
-		return aprovou;
-	}
-
-	public Servicos getServicos() {
-		return servicos;
-	}
-
-	public Utilizador getUtilizador() {
-		return utilizador;
-	}
-	
-	
 	
 }

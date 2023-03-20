@@ -1,14 +1,13 @@
 package org.fao.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.fao.model.ItemSolicitacao;
 import org.fao.model.Solicitacao;
-import org.fao.model.Utilizador;
-import org.fao.model.exception.EntradasNaoEncontradoException;
 import org.fao.model.exception.SolicitacaoNaoEncontradoException;
+import org.fao.repository.ItemSolicitacaoRepository;
 import org.fao.repository.SolicitacaoRepository;
-import org.fao.resources.DTO.SolicitacaoDTO;
 import org.fao.service.SolicitacaoService;
 import org.fao.service.form.EditarSolicitacao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,9 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	
 	@Autowired
 	private SolicitacaoRepository repository;
+	
+	@Autowired
+	private ItemSolicitacaoRepository itRepository;
 	
 	@Override
 	public Solicitacao gravar(Solicitacao solicitacao) {
@@ -61,6 +63,12 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 		solicitacao.setItem(s.getItem());
 		
 		return repository.save(s);
+	}
+
+	@Override
+	public List<ItemSolicitacao> buscarPorId(List<Solicitacao> dto) {
+		// TODO Auto-generated method stub
+		return itRepository.findByIdIn(dto);
 	}
 
 }
