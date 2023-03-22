@@ -20,7 +20,10 @@ public class ItemSaida {
 	
 	private Long quanditade;
 	private BigDecimal gramas;
-	private boolean visibidade;
+	private boolean visibidade = true;
+	private String pratileira;
+	private String armario;
+	private String lote;
 	
 	@ManyToOne
 	@JoinColumn(name = "deposito")
@@ -28,9 +31,9 @@ public class ItemSaida {
 	@ManyToOne
 	@JoinColumn(name = "saidas")
 	private Saidas saidas;
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "productos")
-	private Productos productos;
+	private Productos productos;*/
 	public Long getId() {
 		return id;
 	}
@@ -67,12 +70,23 @@ public class ItemSaida {
 	public void setSaidas(Saidas saidas) {
 		this.saidas = saidas;
 	}
-	public Productos getProductos() {
-		return productos;
+	public String getPratileira() {
+		return pratileira;
 	}
-	public void setProductos(Productos productos) {
-		this.productos = productos;
+	public void setPratileira(String pratileira) {
+		this.pratileira = pratileira;
 	}
-	
-	
+	public String getArmario() {
+		return armario;
+	}
+	public void setArmario(String armario) {
+		this.armario = armario;
+	}
+
+	public String getLote() {
+		return lote;
+	}
+	public void setLote(String lote) {
+		this.lote = lote;
+	}
 }

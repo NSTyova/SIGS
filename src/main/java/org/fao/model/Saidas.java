@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "TB_SAIDAS")
 public class Saidas {
@@ -28,14 +30,15 @@ public class Saidas {
 	@ManyToOne
 	@JoinColumn(name = "entradas")
 	private Entradas entradas;
-	private LocalDate dataRegistro;
+	private LocalDate dataRegistro = LocalDate.now();
 	@ManyToOne
 	@JoinColumn(name = "utlizador")
 	private Utilizador utlizador;
-	private String estado;
-	private boolean visibidade;
+	private String estado = "Respondida";
+	private boolean visibidade = true;
 	
 	@ManyToMany(mappedBy = "saidas", cascade = CascadeType.ALL)
+	@JsonBackReference("role")
 	private List<ItemSaida> iten = new ArrayList<ItemSaida>();
 	
 	public Long getId() {

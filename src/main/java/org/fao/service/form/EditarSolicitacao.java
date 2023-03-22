@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class EditarSolicitacao {
 
 	private Long id;
-	private String estado;
+	private String estado = "Aprovada";
 	private Utilizador aprovou;
 	//@JsonBackReference("role")
 	private List<ItemSolicitacao> item = new ArrayList<ItemSolicitacao>();

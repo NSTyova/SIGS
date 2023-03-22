@@ -13,9 +13,18 @@ import org.springframework.data.repository.query.Param;
 public interface ItemSolicitacaoRepository  extends JpaRepository<ItemSolicitacao, Long>{
 
 	
-	@Query("SELECT it FROM ItemSolicitacao it WHERE it.solicitacao = :solicitacao and it.visibidade=true")
+	@Query("SELECT it FROM ItemSolicitacao it WHERE it.solicitacao = :solicitacao "
+			+ " and it.visibidade=true and it.solicitacao.estado  <> 'Aprovado' ")
 	List<ItemSolicitacao> findByIdIn( @Param("solicitacao") List<Solicitacao> solicitacao);
 	
 	@Query("SELECT i FROM  ItemSolicitacao i  where i.visibidade=true")
 	Page<ItemSolicitacao> listar(Pageable paginacao);
+	
+	@Query("SELECT it FROM ItemSolicitacao it WHERE it.solicitacao = :solicitacao and "
+			+ " it.visibidade=true and it.solicitacao.estado like 'Aprovado'")
+	List<ItemSolicitacao> findAprovados( @Param("solicitacao") List<Solicitacao> solicitacao);
+	
+
+	
+	
 }

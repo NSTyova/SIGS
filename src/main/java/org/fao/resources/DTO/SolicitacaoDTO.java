@@ -18,29 +18,44 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class SolicitacaoDTO {
 
 	private Long id;
-	private List<ItemSolicitacao> item ;
-	
-	
-	
-	public SolicitacaoDTO (Solicitacao solicitacao) {
-		this.id=solicitacao.getId();
-		this.item=solicitacao.getItem();
-		
+	private LocalDate dataCriacao;
+	private String servicos;
+	private String solicitante;
+	private String estado;
+
+	public SolicitacaoDTO(Solicitacao solicitacao) {
+		this.id = solicitacao.getId();
+		this.dataCriacao=solicitacao.getDataSolicitacao();
+		this.servicos=solicitacao.getServicos().getNome();
+		this.solicitante= solicitacao.getSolicitante().getName();
+		this.estado=solicitacao.getEstado();
+
 	}
-	
-	
 
 	public static Page<SolicitacaoDTO> convert(Page<Solicitacao> entrada) {
 		return entrada.map(SolicitacaoDTO::new);
 	}
 
-	public List<ItemSolicitacao> getItem() {
-		return item;
-	}
-	
 	public Long getId() {
 		return id;
 	}
 
-	
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public String getServicos() {
+		return servicos;
+	}
+
+	public String getSolicitante() {
+		return solicitante;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
 }

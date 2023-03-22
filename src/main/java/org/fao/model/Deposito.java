@@ -1,10 +1,17 @@
 package org.fao.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "TB_DEPOSITO")
@@ -16,6 +23,8 @@ public class Deposito {
 	private String descricao;
 	private String localizacao;
 	private boolean visibidade = true;
+	@ManyToMany(mappedBy = "deposito")
+	private List<ItemDeposito> iten = new ArrayList<ItemDeposito>();
 	public Long getId() {
 		return id;
 	}
@@ -33,6 +42,18 @@ public class Deposito {
 	}
 	public void setLocalizacao(String localizacao) {
 		this.localizacao = localizacao;
+	}
+	public boolean isVisibidade() {
+		return visibidade;
+	}
+	public void setVisibidade(boolean visibidade) {
+		this.visibidade = visibidade;
+	}
+	public List<ItemDeposito> getIten() {
+		return iten;
+	}
+	public void setIten(List<ItemDeposito> iten) {
+		this.iten = iten;
 	}
 	
 	

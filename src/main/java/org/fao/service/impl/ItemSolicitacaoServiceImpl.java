@@ -1,36 +1,32 @@
 package org.fao.service.impl;
 
-import org.fao.model.ItemSaida;
-import org.fao.service.ItemSaidaServices;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.fao.model.ItemSolicitacao;
+import org.fao.model.exception.ItemSolicitacaoNaoEncontradoException;
+import org.fao.model.exception.SolicitacaoNaoEncontradoException;
+import org.fao.repository.ItemSolicitacaoRepository;
+import org.fao.service.ItemSolicitacaoService;
+import org.fao.service.form.RemoverProducto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ItemSolicitacaoServiceImpl implements ItemSaidaServices{
+public class ItemSolicitacaoServiceImpl implements ItemSolicitacaoService{
 
+	@Autowired
+	private ItemSolicitacaoRepository repository;
+	
 	@Override
-	public ItemSaida gravar(ItemSaida itemSaida) {
+	public ItemSolicitacao buscarOuFalhar(Long itemSolicitacaoId) {
 		// TODO Auto-generated method stub
-		return null;
+		return repository.findById(itemSolicitacaoId).orElseThrow(() -> new ItemSolicitacaoNaoEncontradoException(itemSolicitacaoId));
 	}
 
 	@Override
-	public ItemSaida buscarOuFalhar(Long itemSaidaId) {
+	public ItemSolicitacao removerProducto(Long id, RemoverProducto remove) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Page<ItemSaida> listar(Pageable paginacao) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Page<ItemSaida> buscarPorNome(Pageable paginacao, String nome) {
-		// TODO Auto-generated method stub
-		return null;
+		ItemSolicitacao item =repository.getById(id);
+		item.setVisibidade(remove.isVisibilidade());
+		return repository.save(item);
 	}
 
 }

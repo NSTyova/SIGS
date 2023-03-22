@@ -1,5 +1,6 @@
 package org.fao.service.impl;
 
+import org.fao.model.ItemTransferencia;
 import org.fao.model.Transferencia;
 import org.fao.service.TransferenciaService;
 import org.springframework.data.domain.Page;
@@ -22,7 +23,7 @@ public class TransferenciaServiceImpl implements TransferenciaService{
 	}
 
 	@Override
-	public Page<Transferencia> listar(Pageable paginacao) {
+	public Page<ItemTransferencia> listar(Pageable paginacao) {
 		// TODO Auto-generated method stub
 		return null;
 	}

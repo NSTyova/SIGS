@@ -64,6 +64,12 @@ public class Transferencia {
 	public void setIten(List<ItemTransferencia> iten) {
 		this.iten = iten;
 	}
+	public boolean isVisibidade() {
+		return visibidade;
+	}
+	public void setVisibidade(boolean visibidade) {
+		this.visibidade = visibidade;
+	}
 	
 	
 }

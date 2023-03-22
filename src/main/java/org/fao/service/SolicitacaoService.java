@@ -12,8 +12,16 @@ public interface SolicitacaoService {
 
 	public Solicitacao gravar(Solicitacao solicitacao);
 	public Solicitacao buscarOuFalhar(Long solicitacaoId);
-	public Page<ItemSolicitacao> listar(Pageable paginacao);
+	public Page<Solicitacao> listar(Pageable paginacao);
 	public Page<Solicitacao>  buscarPorNome(Pageable paginacao,String nome);
 	public Solicitacao editar(Long id, EditarSolicitacao solicitacao);
+	// BUSCAR POR ID SOLICITACAO PENDENTE E CANCELADOS
 	public List<ItemSolicitacao> buscarPorId(List<Solicitacao> dto);
+	
+	// BUSCAR POR ID SOLICITACAO APROVAS
+	public List<ItemSolicitacao> buscarPorAprovados(List<Solicitacao> dto);
+	
+	// LISTAR OS APROVADOS
+	public Page<Solicitacao> listarAprovados(Pageable paginacao);
+	
 }

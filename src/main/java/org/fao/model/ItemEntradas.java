@@ -35,6 +35,7 @@ public class ItemEntradas {
 	@Column(length = 50)
 	private String armario;
 	private boolean visibidade=true;
+	private Long quantidadeActual;
 	
 	@ManyToOne
 	@JoinColumn(name ="tipo")
@@ -128,6 +129,12 @@ public class ItemEntradas {
 	}
 	public void setVisibidade(boolean visibidade) {
 		this.visibidade = visibidade;
+	}
+	public Long getQuantidadeActual() {
+		return quantidadeActual;
+	}
+	public void setQuantidadeActual(Long quantidadeActual) {
+		this.quantidadeActual = quantidadeActual;
 	}
 	
 }

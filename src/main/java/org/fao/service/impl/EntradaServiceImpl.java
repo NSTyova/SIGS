@@ -2,10 +2,14 @@ package org.fao.service.impl;
 
 import java.util.List;
 
+import org.fao.model.Deposito;
 import org.fao.model.Entradas;
+import org.fao.model.ItemDeposito;
 import org.fao.model.ItemEntradas;
 import org.fao.model.exception.EntradasNaoEncontradoException;
+import org.fao.repository.DepositoRepository;
 import org.fao.repository.EntradasRepository;
+import org.fao.repository.ItemDepositoRepository;
 import org.fao.service.EntradaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +21,12 @@ public class EntradaServiceImpl implements EntradaService{
 	
 	@Autowired
 	private EntradasRepository repository;
+	
+	@Autowired
+	private DepositoRepository depositoRepository;
+	
+	@Autowired
+	private ItemDepositoRepository itemDepositoRepository;
 
 	@Override
 	public Entradas gravar(Entradas entradas) {
@@ -25,8 +35,19 @@ public class EntradaServiceImpl implements EntradaService{
 		List<ItemEntradas> iten = entradas.getIten();
 		iten.forEach(i -> i.setEntradas(entradas));
 		
-	
-		return repository.save(entradas);
+		// PEGAR O ID DA DEPOSITO SE SETAR NO ITEM  
+		/*Long id = entradas.getDeposito().getId();
+		Deposito deposito = depositoRepository.getById(id);
+		 System.out.println("***********" + deposito.getDescricao());*/
+		// DIMINUIR A QUANTIDADE NO ITEM ENTRADA ESPECIFICO
+		Deposito deposito= entradas.getDeposito();
+		
+		for(ItemDeposito itemDep : deposito.getIten()) {
+			System.out.println("*********" + deposito.getId());
+			
+		}
+		
+		return null;// repository.save(entradas);
 	}
 
 	@Override

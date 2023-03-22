@@ -10,6 +10,7 @@ import org.fao.repository.ItemSolicitacaoRepository;
 import org.fao.repository.SolicitacaoRepository;
 import org.fao.service.SolicitacaoService;
 import org.fao.service.form.EditarSolicitacao;
+import org.fao.service.form.RemoverProducto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,9 +43,9 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	}
 
 	@Override
-	public Page<ItemSolicitacao> listar(Pageable paginacao) {
+	public Page<Solicitacao> listar(Pageable paginacao) {
 		// TODO Auto-generated method stub
-		return itRepository.listar(paginacao);
+		return repository.findAll(paginacao);
 	}
 
 	@Override
@@ -70,5 +71,18 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 		// TODO Auto-generated method stub
 		return itRepository.findByIdIn(dto);
 	}
+
+	@Override
+	public List<ItemSolicitacao> buscarPorAprovados(List<Solicitacao> dto) {
+		// TODO Auto-generated method stub
+		return itRepository.findAprovados(dto);
+	}
+
+	@Override
+	public Page<Solicitacao> listarAprovados(Pageable paginacao) {
+		return repository.listarAprovados(paginacao);
+	}
+
+	
 
 }

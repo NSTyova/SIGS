@@ -23,7 +23,7 @@ public class ItemTransferencia {
 	private String quantidade;
 	private String armario;
 	private String pratileira;
-	private boolean visibidade;
+	private boolean visibidade=true;
 	@ManyToOne
 	@JoinColumn(name = "productos")
 	private Productos productos;
@@ -100,4 +100,22 @@ public class ItemTransferencia {
 	public void setTransferencia(Transferencia transferencia) {
 		this.transferencia = transferencia;
 	}
+
+	public boolean isVisibidade() {
+		return visibidade;
+	}
+
+	public void setVisibidade(boolean visibidade) {
+		this.visibidade = visibidade;
+	}
+
+	public Deposito getDeposito() {
+		return deposito;
+	}
+
+	public void setDeposito(Deposito deposito) {
+		this.deposito = deposito;
+	}
+	
+	
 }
