@@ -137,4 +137,5 @@ public class ItemEntradas {
 		this.quantidadeActual = quantidadeActual;
 	}
 	
+	
 }

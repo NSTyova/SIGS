@@ -14,14 +14,14 @@ public interface ItemSolicitacaoRepository  extends JpaRepository<ItemSolicitaca
 
 	
 	@Query("SELECT it FROM ItemSolicitacao it WHERE it.solicitacao = :solicitacao "
-			+ " and it.visibidade=true and it.solicitacao.estado  <> 'Aprovado' ")
+			+ " and it.visibidade=true ")
 	List<ItemSolicitacao> findByIdIn( @Param("solicitacao") List<Solicitacao> solicitacao);
 	
 	@Query("SELECT i FROM  ItemSolicitacao i  where i.visibidade=true")
 	Page<ItemSolicitacao> listar(Pageable paginacao);
 	
 	@Query("SELECT it FROM ItemSolicitacao it WHERE it.solicitacao = :solicitacao and "
-			+ " it.visibidade=true and it.solicitacao.estado like 'Aprovado'")
+			+ " it.visibidade=true and it.solicitacao.estado like 'Aprovada'")
 	List<ItemSolicitacao> findAprovados( @Param("solicitacao") List<Solicitacao> solicitacao);
 	
 

@@ -31,9 +31,9 @@ public class ItemSaida {
 	@ManyToOne
 	@JoinColumn(name = "saidas")
 	private Saidas saidas;
-	/*@ManyToOne
+	@ManyToOne
 	@JoinColumn(name = "productos")
-	private Productos productos;*/
+	private Productos productos;
 	public Long getId() {
 		return id;
 	}
@@ -89,4 +89,11 @@ public class ItemSaida {
 	public void setLote(String lote) {
 		this.lote = lote;
 	}
+	public Productos getProductos() {
+		return productos;
+	}
+	public void setProductos(Productos productos) {
+		this.productos = productos;
+	}
+	
 }

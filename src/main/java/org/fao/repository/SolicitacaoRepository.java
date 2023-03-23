@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long>{
 	
-	@Query("SELECT s FROM Solicitacao s WHERE s.estado like 'Aprovado'")
+	@Query("SELECT s FROM Solicitacao s WHERE s.estado like 'Aprovada'")
 	Page<Solicitacao>listarAprovados(Pageable paginacao);
 
 }
