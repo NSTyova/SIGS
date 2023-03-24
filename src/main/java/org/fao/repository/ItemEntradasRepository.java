@@ -3,7 +3,10 @@ package org.fao.repository;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.fao.model.Entradas;
 import org.fao.model.ItemEntradas;
+import org.fao.model.Productos;
+import org.fao.model.TipoProductos;
 import org.fao.service.projections.SolicitadaoSaidaProjections;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +26,21 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 			+ " WHERE p.id=:producto and t.id=:tipo and d.id=:deposito and ie.gramas=:gramas")
 	List<SolicitadaoSaidaProjections> listaSaidas(@Param("producto") Long producto,@Param("tipo") Long tipo, 
 												  @Param("deposito") Long deposito, @Param("gramas") BigDecimal gramas);
+
+	@Query("SELECT ie FROM ItemEntradas ie "
+			+ "WHERE ie.lote =:lote and ie.tipo=:tipos and "
+			+ " ie.productos=:prod")
+	ItemEntradas buscar(@Param("lote") String lote, @Param("prod") Productos prod, @Param("tipos") TipoProductos tipos);
+	
+	
+	
+	// BUSCAR O LOTER PARA POPULAR A ENTRADA NA SAIDA
+	ItemEntradas findByLote(Entradas entradas);
+
+	ItemEntradas findByLoteAndTipoAndProductos(String lote, Productos prod, TipoProductos tipos);
+	
+	
+	
+
+	
 }

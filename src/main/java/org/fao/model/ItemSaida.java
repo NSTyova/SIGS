@@ -34,6 +34,15 @@ public class ItemSaida {
 	@ManyToOne
 	@JoinColumn(name = "productos")
 	private Productos productos;
+	
+	@ManyToOne
+	@JoinColumn(name = "tipo")
+	private TipoProductos tipo;
+	
+	@ManyToOne
+	@JoinColumn(name = "entradas")
+	private Entradas entradas;
+	
 	public Long getId() {
 		return id;
 	}
@@ -95,5 +104,18 @@ public class ItemSaida {
 	public void setProductos(Productos productos) {
 		this.productos = productos;
 	}
+	public TipoProductos getTipo() {
+		return tipo;
+	}
+	public void setTipo(TipoProductos tipo) {
+		this.tipo = tipo;
+	}
+	public Entradas getEntradas() {
+		return entradas;
+	}
+	public void setEntradas(Entradas entradas) {
+		this.entradas = entradas;
+	}
+	
 	
 }

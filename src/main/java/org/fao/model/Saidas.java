@@ -27,9 +27,6 @@ public class Saidas {
 	@ManyToOne
 	@JoinColumn(name = "solicitacao")
 	private Solicitacao solicitacao;
-	@ManyToOne
-	@JoinColumn(name = "entradas")
-	private Entradas entradas;
 	private LocalDate dataRegistro = LocalDate.now();
 	@ManyToOne
 	@JoinColumn(name = "utlizador")
@@ -52,12 +49,6 @@ public class Saidas {
 	}
 	public void setSolicitacao(Solicitacao solicitacao) {
 		this.solicitacao = solicitacao;
-	}
-	public Entradas getEntradas() {
-		return entradas;
-	}
-	public void setEntradas(Entradas entradas) {
-		this.entradas = entradas;
 	}
 	public LocalDate getDataRegistro() {
 		return dataRegistro;
