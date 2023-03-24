@@ -8,6 +8,7 @@ import org.fao.model.ItemEntradas;
 import org.fao.model.ItemSaida;
 import org.fao.model.Productos;
 import org.fao.model.Saidas;
+import org.fao.model.Solicitacao;
 import org.fao.model.TipoProductos;
 import org.fao.repository.EntradasRepository;
 import org.fao.repository.ItemEntradasRepository;
@@ -36,6 +37,8 @@ public class SaidaServiceImpl implements SaidasService {
 	@Autowired
 	private  ProductosRepository entradasRepository;
 	
+	@Autowired
+	private SolicitacaoRepository solicitacaoRepository;
 	@Override
 	public Saidas gravar(Saidas saidas) {
 
@@ -43,11 +46,6 @@ public class SaidaServiceImpl implements SaidasService {
 		List<ItemSaida> iten = saidas.getIten();
 		iten.forEach(s -> s.setSaidas(saidas));
 
-		
-		// PEGAR O ID DA LISTAR E PASSAR A ENTRADA
-		//Long id = saidas.getEntradas().getId();
-		//Entradas entradas = entradaRepository.getById(id); // pegar o repository da query tabem item entrada
-		
 		
 		// PEGAR O PRODUCTO, TIPO, LOTE
 		for(ItemSaida itemSaida : saidas.getIten()) {
@@ -60,8 +58,15 @@ public class SaidaServiceImpl implements SaidasService {
 			ItemEntradas item = itemEntradasRepository.buscar(lote, prod, tipos);// item entradas
 			item.setQuantidadeActual(item.getQuantidadeActual() - itemSaida.getQuanditade());
 			itemSaida.setEntradas(item.getEntradas());
+			
 		}
 		
+		
+		Long idSolicitacao = saidas.getSolicitacao().getId();
+		Solicitacao solicitacao = solicitacaoRepository.getById(idSolicitacao);
+		if(solicitacao.getId().equals(idSolicitacao)) {
+			solicitacao.setEstado("Finalizada");
+		}
 		
 		return  repository.save(saidas);
 		
