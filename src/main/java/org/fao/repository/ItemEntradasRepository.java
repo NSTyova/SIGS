@@ -7,6 +7,9 @@ import org.fao.model.Entradas;
 import org.fao.model.ItemEntradas;
 import org.fao.model.Productos;
 import org.fao.model.TipoProductos;
+import org.fao.service.projections.ProductosPorTipoProjections;
+import org.fao.service.projections.QuantidadesPorLotesProjections;
+import org.fao.service.projections.QuantidadesPorTiposProjections;
 import org.fao.service.projections.SolicitadaoSaidaProjections;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,6 +41,26 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 	ItemEntradas findByLote(Entradas entradas);
 
 	ItemEntradas findByLoteAndTipoAndProductos(String lote, Productos prod, TipoProductos tipos);
+	
+	
+	
+	@Query("SELECT p.nome as productos, t.descricao as tipoProductos, ie.lote as lotes, count(ie) as quantidade "
+			+ " FROM ItemEntradas ie "
+			+ " INNER JOIN ie.productos p "
+			+ " INNER JOIN ie.tipo t GROUP BY p.nome, t.descricao, ie.lote ")
+	List<ProductosPorTipoProjections> totalProductosTipos();
+	
+	
+	@Query("SELECT ie.lote as lotes, count(ie) as quantidade "
+			+ " FROM ItemEntradas ie "
+			+ " GROUP BY ie.lote ")
+	List<QuantidadesPorLotesProjections> quantidadeLotes();
+	
+	
+	@Query("SELECT  t.descricao as tipos, count(ie) as quantidade "
+			+ " FROM ItemEntradas ie "
+			+ " INNER JOIN ie.tipo t GROUP BY  t.descricao ")
+	List<QuantidadesPorTiposProjections> quantidadeTipos();
 	
 	
 	

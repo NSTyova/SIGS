@@ -23,8 +23,6 @@ public class Deposito {
 	private String descricao;
 	private String localizacao;
 	private boolean visibidade = true;
-	@ManyToMany(mappedBy = "deposito")
-	private List<ItemDeposito> iten = new ArrayList<ItemDeposito>();
 	public Long getId() {
 		return id;
 	}
@@ -49,13 +47,6 @@ public class Deposito {
 	public void setVisibidade(boolean visibidade) {
 		this.visibidade = visibidade;
 	}
-	public List<ItemDeposito> getIten() {
-		return iten;
-	}
-	public void setIten(List<ItemDeposito> iten) {
-		this.iten = iten;
-	}
-	
 	
 	
 }
