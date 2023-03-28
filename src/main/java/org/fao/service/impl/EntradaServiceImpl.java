@@ -27,7 +27,9 @@ public class EntradaServiceImpl implements EntradaService{
 		iten.forEach(i -> i.setEntradas(entradas));
 		
 		// PEGAR O ID DA DEPOSITO SE SETAR NO ITEM  
-		
+		for(ItemEntradas item : entradas.getIten()) {
+			item.setQuantidadeActual(item.getQuantidade());
+		}
 		
 		return repository.save(entradas);
 	}

@@ -2,6 +2,7 @@ package org.fao.resources.tabelas;
 
 import java.util.List;
 
+import org.fao.service.projections.EntradasSaidasProjections;
 import org.fao.service.projections.ProductosPorTipoProjections;
 import org.fao.service.projections.QuantidadesPorLotesProjections;
 import org.fao.service.projections.QuantidadesPorTiposProjections;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,9 +24,9 @@ public class ProductosPorTipoResources {
 	private  TabelasServices services;
 	
 	@GetMapping
-	public List<ProductosPorTipoProjections> tipos(){
+	public List<ProductosPorTipoProjections> tipos(@RequestParam Long deposito){
 
-		return services.totalProductosTipos();
+		return services.totalProductosTipos(deposito);
 	}
 	
 	@GetMapping(value = "qtdLotes")
@@ -34,14 +36,20 @@ public class ProductosPorTipoResources {
 	}
 	
 	@GetMapping(value = "qtdTipos")
-	public List<QuantidadesPorTiposProjections> quantidadesTipos(){
+	public List<QuantidadesPorTiposProjections> quantidadesTipos(@RequestParam Long deposito){
 
-		return services.quantidadePorTipo();
+		return services.quantidadePorTipo(deposito);
 	}
 	
 	@GetMapping(value = "qtdService")
 	public List<SolicitacaoPorServicosProjections> quantidadesService(){
 
 		return services.solicitacaoServico();
+	}
+	
+	@GetMapping(value = "entradasSaidas")
+	public EntradasSaidasProjections entradasSaidas(@RequestParam Long deposito){
+
+		return services.entradasSaidas(deposito);
 	}
 }

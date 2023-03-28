@@ -134,7 +134,7 @@ public class ItemEntradas {
 		return quantidadeActual;
 	}
 	public void setQuantidadeActual(Long quantidadeActual) {
-		this.quantidadeActual = getQuantidade();
+		this.quantidadeActual = quantidadeActual;
 	}
 	
 	

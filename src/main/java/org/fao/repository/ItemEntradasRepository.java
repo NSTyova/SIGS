@@ -47,20 +47,29 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 	@Query("SELECT p.nome as productos, t.descricao as tipoProductos,  count(ie.lote) as qdtLotes "
 			+ " FROM ItemEntradas ie "
 			+ " INNER JOIN ie.productos p "
-			+ " INNER JOIN ie.tipo t GROUP BY p.nome, t.descricao ")
-	List<ProductosPorTipoProjections> totalProductosTipos();
+			+ " INNER JOIN ie.tipo t "
+			+ " INNER JOIN ie.entradas e "
+			+ " INNER JOIN e.deposito d "
+			+ " WHERE ie.quantidadeActual > 0  and d.id=:deposito "
+			+ " GROUP BY p.nome, t.descricao ")
+	List<ProductosPorTipoProjections> totalProductosTipos( @Param("deposito") Long deposito);
 	
 	
 	@Query("SELECT ie.lote as lotes, count(ie) as quantidade "
 			+ " FROM ItemEntradas ie "
+			+ " WHERE ie.quantidadeActual > 0 "
 			+ " GROUP BY ie.lote ")
 	List<QuantidadesPorLotesProjections> quantidadeLotes();
 	
 	
 	@Query("SELECT  t.descricao as tipos, count(ie) as quantidade "
 			+ " FROM ItemEntradas ie "
-			+ " INNER JOIN ie.tipo t GROUP BY  t.descricao ")
-	List<QuantidadesPorTiposProjections> quantidadeTipos();
+			+ " INNER JOIN ie.tipo t "
+			+ " INNER JOIN ie.entradas e "
+			+ " INNER JOIN e.deposito d "
+			+ " WHERE ie.quantidadeActual > 0 and d.id=:deposito "
+			+ " GROUP BY  t.descricao ")
+	List<QuantidadesPorTiposProjections> quantidadeTipos(@Param("deposito") Long deposito);
 	
 	
 	
