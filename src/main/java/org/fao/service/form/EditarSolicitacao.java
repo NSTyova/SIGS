@@ -1,15 +1,11 @@
 package org.fao.service.form;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.fao.model.ItemEntradas;
 import org.fao.model.ItemSolicitacao;
 import org.fao.model.Solicitacao;
 import org.fao.model.Utilizador;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 public class EditarSolicitacao {
 

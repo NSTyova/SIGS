@@ -1,16 +1,13 @@
 package org.fao.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.fao.model.Entradas;
 import org.fao.model.ItemEntradas;
 import org.fao.model.ItemSaida;
 import org.fao.model.Productos;
 import org.fao.model.Saidas;
 import org.fao.model.Solicitacao;
 import org.fao.model.TipoProductos;
-import org.fao.repository.EntradasRepository;
 import org.fao.repository.ItemEntradasRepository;
 import org.fao.repository.ProductosRepository;
 import org.fao.repository.SaidasRepository;

@@ -2,7 +2,6 @@ package org.fao.service.impl;
 
 import org.fao.model.ItemSolicitacao;
 import org.fao.model.exception.ItemSolicitacaoNaoEncontradoException;
-import org.fao.model.exception.SolicitacaoNaoEncontradoException;
 import org.fao.repository.ItemSolicitacaoRepository;
 import org.fao.service.ItemSolicitacaoService;
 import org.fao.service.form.RemoverProducto;

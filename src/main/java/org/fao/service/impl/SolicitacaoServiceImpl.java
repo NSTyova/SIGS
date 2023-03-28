@@ -1,7 +1,6 @@
 package org.fao.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.fao.model.ItemSolicitacao;
 import org.fao.model.Solicitacao;
@@ -10,7 +9,6 @@ import org.fao.repository.ItemSolicitacaoRepository;
 import org.fao.repository.SolicitacaoRepository;
 import org.fao.service.SolicitacaoService;
 import org.fao.service.form.EditarSolicitacao;
-import org.fao.service.form.RemoverProducto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

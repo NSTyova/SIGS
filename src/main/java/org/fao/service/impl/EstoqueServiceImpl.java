@@ -1,20 +1,6 @@
 package org.fao.service.impl;
 
-import java.util.List;
-
-import org.fao.model.Comprovante;
-import org.fao.model.Estado;
-import org.fao.model.Estoque;
-import org.fao.model.ItemComprovante;
-import org.fao.model.Productos;
-import org.fao.model.exception.EstoqueNaoEncontradoException;
-import org.fao.repository.ComprovanteRepository;
-import org.fao.repository.EstoqueRepository;
-import org.fao.repository.ProductosRepository;
 import org.fao.service.EstoqueService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service

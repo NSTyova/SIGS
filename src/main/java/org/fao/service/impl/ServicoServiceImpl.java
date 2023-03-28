@@ -1,7 +1,6 @@
 package org.fao.service.impl;
 
 import org.fao.model.Servicos;
-import org.fao.model.exception.DepositoNaoEncontradoException;
 import org.fao.model.exception.ServicosNaoEncontradoException;
 import org.fao.repository.ServicosRepository;
 import org.fao.service.ServicosService;

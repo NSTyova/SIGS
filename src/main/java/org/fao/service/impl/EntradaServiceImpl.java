@@ -5,7 +5,6 @@ import java.util.List;
 import org.fao.model.Entradas;
 import org.fao.model.ItemEntradas;
 import org.fao.model.exception.EntradasNaoEncontradoException;
-import org.fao.repository.DepositoRepository;
 import org.fao.repository.EntradasRepository;
 import org.fao.service.EntradaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ public class EntradaServiceImpl implements EntradaService{
 	@Autowired
 	private EntradasRepository repository;
 	
-	@Autowired
-	private DepositoRepository depositoRepository;
 
 	@Override
 	public Entradas gravar(Entradas entradas) {

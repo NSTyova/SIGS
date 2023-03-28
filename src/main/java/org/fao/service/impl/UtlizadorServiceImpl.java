@@ -5,7 +5,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.fao.model.Utilizador;
-import org.fao.model.exception.TipoProductosNaoEncontradoException;
 import org.fao.model.exception.UtilizadorNaoEncontradoException;
 import org.fao.repository.UtilizadorRepository;
 import org.fao.resources.form.EditarUsuario;

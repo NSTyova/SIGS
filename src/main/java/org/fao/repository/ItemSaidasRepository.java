@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ItemSaidasRepository extends JpaRepository<ItemSaida, Long>{
 
-	@Query("SELECT its FROM ItemSaida its")
-	public List<SolicitacaoPorServicosProjections> solicitacaoServico();
+	
 	
 }

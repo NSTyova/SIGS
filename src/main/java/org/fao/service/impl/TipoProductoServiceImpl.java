@@ -1,7 +1,6 @@
 package org.fao.service.impl;
 
 import org.fao.model.TipoProductos;
-import org.fao.model.exception.EstoqueNaoEncontradoException;
 import org.fao.model.exception.TipoProductosNaoEncontradoException;
 import org.fao.repository.TipoProductosRepository;
 import org.fao.service.TipoProductoService;

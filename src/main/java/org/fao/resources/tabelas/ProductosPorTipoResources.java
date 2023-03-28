@@ -5,6 +5,7 @@ import java.util.List;
 import org.fao.service.projections.ProductosPorTipoProjections;
 import org.fao.service.projections.QuantidadesPorLotesProjections;
 import org.fao.service.projections.QuantidadesPorTiposProjections;
+import org.fao.service.projections.SolicitacaoPorServicosProjections;
 import org.fao.service.tabelas.TabelasServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,5 +37,11 @@ public class ProductosPorTipoResources {
 	public List<QuantidadesPorTiposProjections> quantidadesTipos(){
 
 		return services.quantidadePorTipo();
+	}
+	
+	@GetMapping(value = "qtdService")
+	public List<SolicitacaoPorServicosProjections> quantidadesService(){
+
+		return services.solicitacaoServico();
 	}
 }

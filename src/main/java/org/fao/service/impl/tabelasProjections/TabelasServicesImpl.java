@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.fao.repository.ItemEntradasRepository;
 import org.fao.repository.ItemSaidasRepository;
-import org.fao.repository.ItemSolicitacaoRepository;
-import org.fao.repository.tabelas.TabelasRepository;
+import org.fao.repository.SolicitacaoRepository;
 import org.fao.service.projections.ProductosPorTipoProjections;
 import org.fao.service.projections.QuantidadesPorLotesProjections;
 import org.fao.service.projections.QuantidadesPorTiposProjections;
@@ -21,7 +20,7 @@ public class TabelasServicesImpl implements TabelasServices{
 	private ItemEntradasRepository repository;
 	
 	@Autowired
-	private ItemSaidasRepository saidasRepository;
+	private SolicitacaoRepository solicitacaoRepository;
 	
 	@Override
 	public List<ProductosPorTipoProjections> totalProductosTipos() {
@@ -44,7 +43,7 @@ public class TabelasServicesImpl implements TabelasServices{
 	@Override
 	public List<SolicitacaoPorServicosProjections> solicitacaoServico() {
 		// TODO Auto-generated method stub
-		return null;
+		return solicitacaoRepository.solicitacaoServico();
 	}
 
 }

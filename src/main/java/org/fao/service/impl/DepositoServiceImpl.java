@@ -2,7 +2,6 @@ package org.fao.service.impl;
 
 import org.fao.model.Deposito;
 import org.fao.model.exception.DepositoNaoEncontradoException;
-import org.fao.model.exception.UtilizadorNaoEncontradoException;
 import org.fao.repository.DepositoRepository;
 import org.fao.service.DepositoService;
 import org.springframework.beans.factory.annotation.Autowired;

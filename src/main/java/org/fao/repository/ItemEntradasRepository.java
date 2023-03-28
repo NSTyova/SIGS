@@ -44,10 +44,10 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 	
 	
 	
-	@Query("SELECT p.nome as productos, t.descricao as tipoProductos, ie.lote as lotes, count(ie) as quantidade "
+	@Query("SELECT p.nome as productos, t.descricao as tipoProductos,  count(ie.lote) as qdtLotes "
 			+ " FROM ItemEntradas ie "
 			+ " INNER JOIN ie.productos p "
-			+ " INNER JOIN ie.tipo t GROUP BY p.nome, t.descricao, ie.lote ")
+			+ " INNER JOIN ie.tipo t GROUP BY p.nome, t.descricao ")
 	List<ProductosPorTipoProjections> totalProductosTipos();
 	
 	
