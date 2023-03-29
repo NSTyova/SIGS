@@ -3,6 +3,7 @@ package org.fao.service.impl.tabelasProjections;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.fao.model.ItemEntradas;
 import org.fao.repository.ItemEntradasRepository;
 import org.fao.repository.ItemSaidasRepository;
 import org.fao.repository.SolicitacaoRepository;
@@ -71,6 +72,12 @@ public class TabelasServicesImpl implements TabelasServices{
 	public Page<InventarioSaidasProjections> saidas(Pageable paginacao, Long deposito, LocalDate dataInicio, LocalDate dataFim) {
 		// TODO Auto-generated method stub
 		return itemSaidasRepository.saidas(paginacao, deposito,dataInicio, dataFim);
+	}
+
+	@Override
+	public List<ItemEntradas> listaExcel(Long deposito, LocalDate dataEntrada, LocalDate dataFim) {
+		
+		return repository.inventarioExel(deposito, dataEntrada, dataFim);
 	}
 
 }

@@ -88,4 +88,16 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 			+ " WHERE d.id=:deposito and e.dataEntrada BETWEEN :dataInicio and :dataFim")
 	public Page<InventarioEntradasProjections> entradas(Pageable paginacao,
 						@Param("deposito") Long deposito,@Param("dataInicio") LocalDate dataInicio, @Param("dataFim")LocalDate dataFim);
+	
+	
+	// QUERY PARA O EXCEL
+		@Query("SELECT its "
+				+ " FROM ItemEntradas its "
+				+ " INNER JOIN its.entradas e "
+				+ " INNER JOIN e.deposito d "
+				+ " INNER JOIN its.productos p "
+				+ " INNER JOIN its.tipo t "
+				+ " WHERE d.id=:deposito and e.dataEntrada BETWEEN :dataInicio and :dataFim")
+		public List<ItemEntradas> inventarioExel(@Param("deposito") Long deposito,@Param("dataInicio") LocalDate dataInicio, 
+																  @Param("dataFim")LocalDate dataFim);
 }

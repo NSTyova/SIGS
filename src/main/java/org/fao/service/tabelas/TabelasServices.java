@@ -3,6 +3,7 @@ package org.fao.service.tabelas;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.fao.model.ItemEntradas;
 import org.fao.service.projections.EntradasSaidasProjections;
 import org.fao.service.projections.InventarioEntradasProjections;
 import org.fao.service.projections.InventarioSaidasProjections;
@@ -38,4 +39,7 @@ public interface TabelasServices {
 	
 	// INVENTARIO DE Saidas
 	public Page<InventarioSaidasProjections> saidas(Pageable paginacao, Long deposito, LocalDate dataInicio, LocalDate dataFim);
+	
+	// EXPORTAT EXCEL 
+	List<ItemEntradas> listaExcel(Long deposito, LocalDate dataEntrada, LocalDate dataFim);
 }

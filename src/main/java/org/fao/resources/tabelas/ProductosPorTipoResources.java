@@ -1,8 +1,13 @@
 package org.fao.resources.tabelas;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.fao.model.ItemEntradas;
+import org.fao.service.dtoExcel.EntradasExcel;
 import org.fao.service.projections.EntradasSaidasProjections;
 import org.fao.service.projections.InventarioEntradasProjections;
 import org.fao.service.projections.InventarioSaidasProjections;
@@ -80,4 +85,27 @@ public class ProductosPorTipoResources {
 		
 		return services.saidas(paginacao, deposito, dataInicio, dataFim);
 	}
+	
+	//Exportar em Excel Xlsx usando o back
+		@GetMapping("/export/excel")
+		public void exportToXLS(HttpServletResponse response, @RequestParam Long deposito, 
+				@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+				@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) throws IOException {
+			response.setContentType("application/octet-stream");
+			
+			String headerKey= "Content-Disposition";
+			String headerValue= "attachment; filename=InventarioDeEntradas.xlsx";
+					
+			response.setHeader(headerKey, headerValue);
+		
+			List<ItemEntradas> listaEcas = services.listaExcel(deposito, dataInicio, dataFim);
+			
+			/**
+			 * desenho do Exel
+			 */
+			EntradasExcel entradas = new EntradasExcel(listaEcas);
+			entradas.export(response);
+			
+			
+		}
 }
