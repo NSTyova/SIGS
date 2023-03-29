@@ -1,13 +1,12 @@
 package org.fao.service.projections;
 
-public interface InventarioEntradasProjections {
+public interface InventarioSaidasProjections {
 
 	public String getProductos();
 	public String getTipos();
 	public String getPratileira();
 	public String getArmario();
-	public Long getQtdEntradas();
-	public Long getQtdActual();
-	public Long getQtdSaidas();
+	public Long getQuantidade();
 	public String getLotes();
+	public String getServico();
 }

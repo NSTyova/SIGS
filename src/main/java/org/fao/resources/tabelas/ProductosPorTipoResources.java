@@ -5,12 +5,16 @@ import java.util.List;
 
 import org.fao.service.projections.EntradasSaidasProjections;
 import org.fao.service.projections.InventarioEntradasProjections;
+import org.fao.service.projections.InventarioSaidasProjections;
 import org.fao.service.projections.ProductosPorTipoProjections;
 import org.fao.service.projections.QuantidadesPorLotesProjections;
 import org.fao.service.projections.QuantidadesPorTiposProjections;
 import org.fao.service.projections.SolicitacaoPorServicosProjections;
 import org.fao.service.tabelas.TabelasServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,9 +61,23 @@ public class ProductosPorTipoResources {
 	}
 	
 	@GetMapping(value = "entradas")
-	public List<InventarioEntradasProjections> entradas(@RequestParam Long deposito,@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio, 
+	public Page<InventarioEntradasProjections> entradas(
+			@RequestParam int pagina,
+			@RequestParam int qtd,
+			@RequestParam Long deposito,@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio, 
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim){
-
-		return services.entradas(deposito, dataInicio, dataFim);
+		Pageable paginacao = PageRequest.of(pagina, qtd);
+		return services.entradas(paginacao,deposito, dataInicio, dataFim);
+	}
+	
+	@GetMapping(value = "saidas")
+	public Page<InventarioSaidasProjections> saidas(
+			@RequestParam int pagina,
+			@RequestParam int qtd,
+			@RequestParam Long deposito, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+									@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim){
+		Pageable paginacao = PageRequest.of(pagina, qtd);
+		
+		return services.saidas(paginacao, deposito, dataInicio, dataFim);
 	}
 }

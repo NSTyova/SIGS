@@ -13,6 +13,8 @@ import org.fao.service.projections.ProductosPorTipoProjections;
 import org.fao.service.projections.QuantidadesPorLotesProjections;
 import org.fao.service.projections.QuantidadesPorTiposProjections;
 import org.fao.service.projections.SolicitadaoSaidaProjections;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -76,7 +78,7 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 	
 	// QUERY PARA O INVENTARIO
 	@Query("SELECT p.nome as productos, t.descricao as tipos, its.armario as armario,"
-			+ " its.pratileira as pratileira, its.quantidade as qtdEntradas,"
+			+ " its.pratileira as pratileira, its.quantidade as qtdEntradas, its.lote as lotes, "
 			+ " its.quantidadeActual as qtdActual, (its.quantidade - its.quantidadeActual) as qtdSaidas"
 			+ " FROM ItemEntradas its "
 			+ " INNER JOIN its.entradas e "
@@ -84,5 +86,6 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 			+ " INNER JOIN its.productos p "
 			+ " INNER JOIN its.tipo t "
 			+ " WHERE d.id=:deposito and e.dataEntrada BETWEEN :dataInicio and :dataFim")
-	public List<InventarioEntradasProjections> entradas(@Param("deposito") Long deposito,@Param("dataInicio") LocalDate dataInicio, @Param("dataFim")LocalDate dataFim);
+	public Page<InventarioEntradasProjections> entradas(Pageable paginacao,
+						@Param("deposito") Long deposito,@Param("dataInicio") LocalDate dataInicio, @Param("dataFim")LocalDate dataFim);
 }
