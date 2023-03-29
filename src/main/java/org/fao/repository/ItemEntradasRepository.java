@@ -1,12 +1,14 @@
 package org.fao.repository;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.fao.model.Entradas;
 import org.fao.model.ItemEntradas;
 import org.fao.model.Productos;
 import org.fao.model.TipoProductos;
+import org.fao.service.projections.InventarioEntradasProjections;
 import org.fao.service.projections.ProductosPorTipoProjections;
 import org.fao.service.projections.QuantidadesPorLotesProjections;
 import org.fao.service.projections.QuantidadesPorTiposProjections;
@@ -72,7 +74,15 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 	List<QuantidadesPorTiposProjections> quantidadeTipos(@Param("deposito") Long deposito);
 	
 	
-	
-
-	
+	// QUERY PARA O INVENTARIO
+	@Query("SELECT p.nome as productos, t.descricao as tipos, its.armario as armario,"
+			+ " its.pratileira as pratileira, its.quantidade as qtdEntradas,"
+			+ " its.quantidadeActual as qtdActual, (its.quantidade - its.quantidadeActual) as qtdSaidas"
+			+ " FROM ItemEntradas its "
+			+ " INNER JOIN its.entradas e "
+			+ " INNER JOIN e.deposito d "
+			+ " INNER JOIN its.productos p "
+			+ " INNER JOIN its.tipo t "
+			+ " WHERE d.id=:deposito and e.dataEntrada BETWEEN :dataInicio and :dataFim")
+	public List<InventarioEntradasProjections> entradas(@Param("deposito") Long deposito,@Param("dataInicio") LocalDate dataInicio, @Param("dataFim")LocalDate dataFim);
 }

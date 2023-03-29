@@ -1,8 +1,10 @@
 package org.fao.service.tabelas;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.fao.service.projections.EntradasSaidasProjections;
+import org.fao.service.projections.InventarioEntradasProjections;
 import org.fao.service.projections.ProductosPorTipoProjections;
 import org.fao.service.projections.QuantidadesPorLotesProjections;
 import org.fao.service.projections.QuantidadesPorTiposProjections;
@@ -27,4 +29,7 @@ public interface TabelasServices {
 	
 	// CARDS DE ENTRADAS E SAIDAS
 	public EntradasSaidasProjections entradasSaidas(Long deposito);
+	
+	// INVENTARIO DE ENTRADA
+	public List<InventarioEntradasProjections> entradas(Long deposito, LocalDate dataInicio, LocalDate dataFim);
 }

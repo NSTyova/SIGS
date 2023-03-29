@@ -1,11 +1,13 @@
 package org.fao.service.impl.tabelasProjections;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.fao.repository.ItemEntradasRepository;
 import org.fao.repository.ItemSaidasRepository;
 import org.fao.repository.SolicitacaoRepository;
 import org.fao.service.projections.EntradasSaidasProjections;
+import org.fao.service.projections.InventarioEntradasProjections;
 import org.fao.service.projections.ProductosPorTipoProjections;
 import org.fao.service.projections.QuantidadesPorLotesProjections;
 import org.fao.service.projections.QuantidadesPorTiposProjections;
@@ -54,6 +56,12 @@ public class TabelasServicesImpl implements TabelasServices{
 	public EntradasSaidasProjections entradasSaidas(Long deposito) {
 		// TODO Auto-generated method stub
 		return itemSaidasRepository.entradasSaidas(deposito);
+	}
+
+	@Override
+	public List<InventarioEntradasProjections> entradas(Long deposito, LocalDate dataInicio, LocalDate dataFim) {
+		// TODO Auto-generated method stub
+		return repository.entradas(deposito, dataInicio, dataFim);
 	}
 
 }

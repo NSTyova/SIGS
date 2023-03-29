@@ -1,14 +1,17 @@
 package org.fao.resources.tabelas;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.fao.service.projections.EntradasSaidasProjections;
+import org.fao.service.projections.InventarioEntradasProjections;
 import org.fao.service.projections.ProductosPorTipoProjections;
 import org.fao.service.projections.QuantidadesPorLotesProjections;
 import org.fao.service.projections.QuantidadesPorTiposProjections;
 import org.fao.service.projections.SolicitacaoPorServicosProjections;
 import org.fao.service.tabelas.TabelasServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,5 +54,12 @@ public class ProductosPorTipoResources {
 	public EntradasSaidasProjections entradasSaidas(@RequestParam Long deposito){
 
 		return services.entradasSaidas(deposito);
+	}
+	
+	@GetMapping(value = "entradas")
+	public List<InventarioEntradasProjections> entradas(@RequestParam Long deposito,@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio, 
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim){
+
+		return services.entradas(deposito, dataInicio, dataFim);
 	}
 }
