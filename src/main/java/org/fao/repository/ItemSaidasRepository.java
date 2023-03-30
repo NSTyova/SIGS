@@ -1,7 +1,9 @@
 package org.fao.repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import org.fao.model.ItemEntradas;
 import org.fao.model.ItemSaida;
 import org.fao.service.projections.EntradasSaidasProjections;
 import org.fao.service.projections.InventarioSaidasProjections;
@@ -34,5 +36,19 @@ public interface ItemSaidasRepository extends JpaRepository<ItemSaida, Long>{
 			+ " WHERE d.id=:deposito  and s.dataRegistro BETWEEN :dataEntrada and :dataSaidas")
 	public Page<InventarioSaidasProjections> saidas(Pageable paginacao, @Param("deposito") Long deposito, @Param("dataEntrada") LocalDate dataEntrada,
 												@Param("dataSaidas") LocalDate dataSaidas);
+	
+	
+	// QUERY PARA O EXCEL
+	@Query("SELECT its "
+			+ " FROM ItemSaida its "
+			+ " INNER JOIN its.saidas s"
+			+ " INNER JOIN its.deposito d "
+			+ " INNER JOIN its.productos p"
+			+ " INNER JOIN its.tipo t "
+			+ " INNER JOIN s.solicitacao so"
+			+ " INNER JOIN so.servicos ser"
+			+ " WHERE d.id=:deposito  and s.dataRegistro BETWEEN :dataInicio and :dataFim")
+			public List<ItemSaida> inventarioExel(@Param("deposito") Long deposito,@Param("dataInicio") LocalDate dataInicio, 
+																	  @Param("dataFim")LocalDate dataFim);
 	
 }

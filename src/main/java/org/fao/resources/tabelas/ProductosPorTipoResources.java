@@ -7,7 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.fao.model.ItemEntradas;
+import org.fao.model.ItemSaida;
 import org.fao.service.dtoExcel.EntradasExcel;
+import org.fao.service.dtoExcel.SaidasExcel;
 import org.fao.service.projections.EntradasSaidasProjections;
 import org.fao.service.projections.InventarioEntradasProjections;
 import org.fao.service.projections.InventarioSaidasProjections;
@@ -33,79 +35,99 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductosPorTipoResources {
 
 	@Autowired
-	private  TabelasServices services;
-	
+	private TabelasServices services;
+
 	@GetMapping
-	public List<ProductosPorTipoProjections> tipos(@RequestParam Long deposito){
+	public List<ProductosPorTipoProjections> tipos(@RequestParam Long deposito) {
 
 		return services.totalProductosTipos(deposito);
 	}
-	
+
 	@GetMapping(value = "qtdLotes")
-	public List<QuantidadesPorLotesProjections> quantidades(){
+	public List<QuantidadesPorLotesProjections> quantidades() {
 
 		return services.quantidadePorLotes();
 	}
-	
+
 	@GetMapping(value = "qtdTipos")
-	public List<QuantidadesPorTiposProjections> quantidadesTipos(@RequestParam Long deposito){
+	public List<QuantidadesPorTiposProjections> quantidadesTipos(@RequestParam Long deposito) {
 
 		return services.quantidadePorTipo(deposito);
 	}
-	
+
 	@GetMapping(value = "qtdService")
-	public List<SolicitacaoPorServicosProjections> quantidadesService(){
+	public List<SolicitacaoPorServicosProjections> quantidadesService() {
 
 		return services.solicitacaoServico();
 	}
-	
+
 	@GetMapping(value = "entradasSaidas")
-	public EntradasSaidasProjections entradasSaidas(@RequestParam Long deposito){
+	public EntradasSaidasProjections entradasSaidas(@RequestParam Long deposito) {
 
 		return services.entradasSaidas(deposito);
 	}
-	
+
 	@GetMapping(value = "entradas")
-	public Page<InventarioEntradasProjections> entradas(
-			@RequestParam int pagina,
-			@RequestParam int qtd,
-			@RequestParam Long deposito,@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio, 
-			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim){
+	public Page<InventarioEntradasProjections> entradas(@RequestParam int pagina, @RequestParam int qtd,
+			@RequestParam Long deposito,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
-		return services.entradas(paginacao,deposito, dataInicio, dataFim);
+		return services.entradas(paginacao, deposito, dataInicio, dataFim);
 	}
-	
+
 	@GetMapping(value = "saidas")
-	public Page<InventarioSaidasProjections> saidas(
-			@RequestParam int pagina,
-			@RequestParam int qtd,
-			@RequestParam Long deposito, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
-									@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim){
+	public Page<InventarioSaidasProjections> saidas(@RequestParam int pagina, @RequestParam int qtd,
+			@RequestParam Long deposito,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
-		
+
 		return services.saidas(paginacao, deposito, dataInicio, dataFim);
 	}
-	
-	//Exportar em Excel Xlsx usando o back
-		@GetMapping("/export/excel")
-		public void exportToXLS(HttpServletResponse response, @RequestParam Long deposito, 
-				@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
-				@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) throws IOException {
-			response.setContentType("application/octet-stream");
-			
-			String headerKey= "Content-Disposition";
-			String headerValue= "attachment; filename=InventarioDeEntradas.xlsx";
-					
-			response.setHeader(headerKey, headerValue);
-		
-			List<ItemEntradas> listaEcas = services.listaExcel(deposito, dataInicio, dataFim);
-			
-			/**
-			 * desenho do Exel
-			 */
-			EntradasExcel entradas = new EntradasExcel(listaEcas);
-			entradas.export(response);
-			
-			
-		}
+
+	// Exportar em Excel Xlsx usando o back
+	@GetMapping("/export/excel")
+	public void exportToXLS(HttpServletResponse response, @RequestParam Long deposito,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) throws IOException {
+		response.setContentType("application/octet-stream");
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=InventarioDeEntradas.xlsx";
+
+		response.setHeader(headerKey, headerValue);
+
+		List<ItemEntradas> listaEcas = services.listaExcel(deposito, dataInicio, dataFim);
+
+		/**
+		 * desenho do Exel
+		 */
+		EntradasExcel entradas = new EntradasExcel(listaEcas);
+		entradas.export(response);
+
+	}
+
+	// EXPORTAR EXCEL PARA SAIDAS 
+	@GetMapping("/export/saidas")
+	public void exportToXLSSaidas(HttpServletResponse response, @RequestParam Long deposito,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) throws IOException {
+		response.setContentType("application/octet-stream");
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=InventarioDeSaidas.xlsx";
+
+		response.setHeader(headerKey, headerValue);
+
+		List<ItemSaida> listaSaidas = services.listaExcelSaidas(deposito, dataInicio, dataFim);
+
+		/**
+		 * desenho do Exel
+		 */
+		SaidasExcel saidas = new SaidasExcel(listaSaidas);
+		saidas.export(response);
+
+	}
+
 }

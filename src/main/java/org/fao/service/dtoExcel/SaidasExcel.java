@@ -1,7 +1,6 @@
 package org.fao.service.dtoExcel;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -12,13 +11,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.fao.model.ItemEntradas;
+import org.fao.model.ItemSaida;
 
-public class EntradasExcel {
+public class SaidasExcel {
 
 	private XSSFWorkbook workbook;
 	private XSSFSheet sheet;
 
-	private List<ItemEntradas> listaItemEntradas;
+	private List<ItemSaida> listaItemSaidas;
 
 	private void writeHeaderRow() {
 		Row row = sheet.createRow(0);
@@ -28,56 +28,53 @@ public class EntradasExcel {
 		cell = row.createCell(1);
 		cell.setCellValue("Tipo De Medicamento");
 		cell = row.createCell(2);
-		cell.setCellValue("Lotes");
-		cell = row.createCell(3);
 		cell.setCellValue("Armario");
-		cell = row.createCell(4);
+		cell = row.createCell(3);
 		cell.setCellValue("Pratileira");
+		cell = row.createCell(4);
+		cell.setCellValue("Lote");
 		cell = row.createCell(5);
-		cell.setCellValue("Quantidade Entradas");
+		cell.setCellValue("Quantidade");
 		cell = row.createCell(6);
-		cell.setCellValue("Quantidade Actual");
+		cell.setCellValue("Departamento");
 		cell = row.createCell(7);
-		cell.setCellValue("Fornecedores");
+		cell.setCellValue("Utilizador que Solicitou");
 		cell = row.createCell(8);
-		cell.setCellValue("Utilizador Registrou");
+		cell.setCellValue("Utilizador que Aprovou");
 		cell = row.createCell(9);
-		cell.setCellValue("Data Entrada");
-		cell = row.createCell(10);
-		cell.setCellValue("Tipo Entrada");
+		cell.setCellValue("Utilizador que Registrou a Saida");
+		cell = row.createCell(9);
+		cell.setCellValue("Data Saida");
 		
 	}
 
 	private void writeDataRow() {
 		int rouCount =1;
-		for (ItemEntradas entradas : listaItemEntradas) {
+		for (ItemSaida saidas : listaItemSaidas) {
 			
 			Row row = sheet.createRow(rouCount);
 			Cell cell = row.createCell(0);
-			cell.setCellValue(entradas.getProductos().getNome());
+			cell.setCellValue(saidas.getProductos().getNome());
 			cell =row.createCell(1);
-			cell.setCellValue(entradas.getTipo().getDescricao());
+			cell.setCellValue(saidas.getTipo().getDescricao());
 			cell =row.createCell(2);
-			cell.setCellValue(entradas.getLote());
+			cell.setCellValue(saidas.getArmario());
 			cell =row.createCell(3);
-			cell.setCellValue(entradas.getArmario());
+			cell.setCellValue(saidas.getPratileira());
 			cell =row.createCell(4);
-			cell.setCellValue(entradas.getPratileira());
+			cell.setCellValue(saidas.getLote());
 			cell =row.createCell(5);
-			cell.setCellValue(entradas.getQuantidade());
+			cell.setCellValue(saidas.getQuanditade());
 			cell =row.createCell(6);
-			cell.setCellValue(entradas.getQuantidadeActual());
+			cell.setCellValue(saidas.getSaidas().getSolicitacao().getServicos().getNome());
 			cell =row.createCell(7);
-			cell.setCellValue(entradas.getEntradas().getFornecedores().getNome());
+			cell.setCellValue(saidas.getSaidas().getSolicitacao().getSolicitante().getName());
 			cell =row.createCell(8);
-			cell.setCellValue(entradas.getEntradas().getUtilizador().getName());
+			cell.setCellValue(saidas.getSaidas().getSolicitacao().getAprovou().getName());
 			cell =row.createCell(9);
-			cell.setCellValue(entradas.getEntradas().getDataEntrada());
+			cell.setCellValue(saidas.getSaidas().getUtlizador().getName());
 			cell =row.createCell(10);
-			cell.setCellValue(entradas.getEntradas().getTipoEntrada());
-			cell =row.createCell(11);
-			cell.setCellValue(converterCustro(entradas.getCustoLotes()));
-// TDOS QUE JA VEM , AS DATAS FORNECEDORES, UTILIZADOR, DOACAO OU COMPRA, VALOR
+			cell.setCellValue(saidas.getSaidas().getDataRegistro());
 			rouCount ++;
 		}
 	}
@@ -93,16 +90,13 @@ public class EntradasExcel {
 
 	
 	// validar um método para adcionar uma lista antes de chamar para para preencher o excel..
-	public EntradasExcel(List<ItemEntradas> listaEcas) {
-		this.listaItemEntradas = listaEcas;
+	public SaidasExcel(List<ItemSaida> listaSaidas) {
+		this.listaItemSaidas = listaSaidas;
 		workbook= new XSSFWorkbook();
 		sheet= workbook.createSheet();
 	}
 	
-	// CONVERTER O CUSTO
-	public double converterCustro(BigDecimal valor) {
-		return valor.doubleValue();	
-	}
+	
 	
 
 }

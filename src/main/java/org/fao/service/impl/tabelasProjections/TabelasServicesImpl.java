@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.fao.model.ItemEntradas;
+import org.fao.model.ItemSaida;
 import org.fao.repository.ItemEntradasRepository;
 import org.fao.repository.ItemSaidasRepository;
 import org.fao.repository.SolicitacaoRepository;
@@ -78,6 +79,12 @@ public class TabelasServicesImpl implements TabelasServices{
 	public List<ItemEntradas> listaExcel(Long deposito, LocalDate dataEntrada, LocalDate dataFim) {
 		
 		return repository.inventarioExel(deposito, dataEntrada, dataFim);
+	}
+
+	@Override
+	public List<ItemSaida> listaExcelSaidas(Long deposito, LocalDate dataEntrada, LocalDate dataFim) {
+		// TODO Auto-generated method stub
+		return itemSaidasRepository.inventarioExel(deposito, dataEntrada, dataFim);
 	}
 
 }
