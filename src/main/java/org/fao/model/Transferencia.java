@@ -21,55 +21,107 @@ public class Transferencia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private LocalDate dataTransferencia;
+	private LocalDate dataTransferencia= LocalDate.now();
 	private boolean visibidade=true;
 	@ManyToOne
-	@JoinColumn(name = "entradas")
-	private Entradas entradas;
+	@JoinColumn(name = "deposito_origem")
+	private Deposito origem;
+	
+	@ManyToOne
+	@JoinColumn(name = "deposito_destino")
+	private Deposito destino;
+	
+	private String estado="Pendente";
 	
 	@ManyToOne
 	@JoinColumn(name = "utilizador")
 	private Utilizador utilizador;
 	
+	
 	@ManyToMany(mappedBy = "transferencia", cascade = CascadeType.ALL)
 	private List<ItemTransferencia> iten = new ArrayList<ItemTransferencia>();
-	
+
+
 	public Long getId() {
 		return id;
 	}
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 	public LocalDate getDataTransferencia() {
 		return dataTransferencia;
 	}
+
+
 	public void setDataTransferencia(LocalDate dataTransferencia) {
 		this.dataTransferencia = dataTransferencia;
 	}
-	public Entradas getEntradas() {
-		return entradas;
-	}
-	public void setEntradas(Entradas entradas) {
-		this.entradas = entradas;
-	}
-	public Utilizador getUtilizador() {
-		return utilizador;
-	}
-	public void setUtilizador(Utilizador utilizador) {
-		this.utilizador = utilizador;
-	}
-	public List<ItemTransferencia> getIten() {
-		return iten;
-	}
-	public void setIten(List<ItemTransferencia> iten) {
-		this.iten = iten;
-	}
+
+
 	public boolean isVisibidade() {
 		return visibidade;
 	}
+
+
 	public void setVisibidade(boolean visibidade) {
 		this.visibidade = visibidade;
 	}
+
+
+	public Deposito getOrigem() {
+		return origem;
+	}
+
+
+	public void setOrigem(Deposito origem) {
+		this.origem = origem;
+	}
+
+
+	public Deposito getDestino() {
+		return destino;
+	}
+
+
+	public void setDestino(Deposito destino) {
+		this.destino = destino;
+	}
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
+	public Utilizador getUtilizador() {
+		return utilizador;
+	}
+
+
+	public void setUtilizador(Utilizador utilizador) {
+		this.utilizador = utilizador;
+	}
+
+
+	public List<ItemTransferencia> getIten() {
+		return iten;
+	}
+
+
+	public void setIten(List<ItemTransferencia> iten) {
+		this.iten = iten;
+	}
+	
+	
 	
 	
 }

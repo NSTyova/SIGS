@@ -18,9 +18,8 @@ public class ItemTransferencia {
 	private Long id;
 	@Column(length = 50)
 	private String codigo;
-	@Column(unique = true)
 	private String lote;
-	private String quantidade;
+	private Long quantidade;
 	private String armario;
 	private String pratileira;
 	private boolean visibidade=true;
@@ -33,9 +32,12 @@ public class ItemTransferencia {
 	private Transferencia transferencia;
 	
 	@ManyToOne
-	@JoinColumn(name = "deposito")
-	private Deposito deposito;
-
+	@JoinColumn(name = "entradas")
+	private Entradas entradas;
+	
+	@ManyToOne
+	@JoinColumn(name = "tipo")
+	private TipoProductos tipo;
 
 	public Long getId() {
 		return id;
@@ -61,11 +63,11 @@ public class ItemTransferencia {
 		this.lote = lote;
 	}
 
-	public String getQuantidade() {
+	public Long getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(String quantidade) {
+	public void setQuantidade(Long quantidade) {
 		this.quantidade = quantidade;
 	}
 
@@ -85,6 +87,14 @@ public class ItemTransferencia {
 		this.pratileira = pratileira;
 	}
 
+	public boolean isVisibidade() {
+		return visibidade;
+	}
+
+	public void setVisibidade(boolean visibidade) {
+		this.visibidade = visibidade;
+	}
+
 	public Productos getProductos() {
 		return productos;
 	}
@@ -101,21 +111,17 @@ public class ItemTransferencia {
 		this.transferencia = transferencia;
 	}
 
-	public boolean isVisibidade() {
-		return visibidade;
+	public Entradas getEntradas() {
+		return entradas;
 	}
 
-	public void setVisibidade(boolean visibidade) {
-		this.visibidade = visibidade;
+	public void setEntradas(Entradas entradas) {
+		this.entradas = entradas;
 	}
-
-	public Deposito getDeposito() {
-		return deposito;
+	public TipoProductos getTipo() {
+		return tipo;
 	}
-
-	public void setDeposito(Deposito deposito) {
-		this.deposito = deposito;
+	public void setTipo(TipoProductos tipo) {
+		this.tipo = tipo;
 	}
-	
-	
 }

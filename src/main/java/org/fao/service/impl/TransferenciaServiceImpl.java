@@ -1,19 +1,60 @@
 package org.fao.service.impl;
 
+import java.util.List;
+
+import org.fao.model.ItemEntradas;
 import org.fao.model.ItemTransferencia;
+import org.fao.model.Productos;
+import org.fao.model.TipoProductos;
 import org.fao.model.Transferencia;
+import org.fao.repository.ItemEntradasRepository;
+import org.fao.repository.ProductosRepository;
+import org.fao.repository.SolicitacaoRepository;
+import org.fao.repository.TipoProductosRepository;
+import org.fao.repository.TransferenciaRepository;
 import org.fao.service.TransferenciaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TransferenciaServiceImpl implements TransferenciaService{
+public class TransferenciaServiceImpl implements TransferenciaService {
+
+	@Autowired
+	private TransferenciaRepository repository;
+	
+	@Autowired
+	private ItemEntradasRepository itemEntradasRepository;
+	
+	@Autowired
+	private TipoProductosRepository tipoProductosRepository;
+	
+	@Autowired
+	private  ProductosRepository entradasRepository;
 
 	@Override
 	public Transferencia gravar(Transferencia transferencia) {
 		// TODO Auto-generated method stub
-		return null;
+		// GRAVAR A TRANSFERENCIA DO TRANSFERENCIA
+		List<ItemTransferencia> iten = transferencia.getIten();
+		iten.forEach(t -> t.setTransferencia(transferencia));
+
+		// PEGAR O PRODUCTO, TIPO, LOTE
+		for (ItemTransferencia item : transferencia.getIten()) {
+			
+			Long tipo = item.getTipo().getId();
+			TipoProductos tipos = tipoProductosRepository.getById(tipo);
+			Long produco = item.getProductos().getId();
+			Productos prod = entradasRepository.getById(produco);
+			String lote = item.getLote();
+			ItemEntradas itemEntradas = itemEntradasRepository.buscar(lote, prod, tipos);// item entradas
+			itemEntradas.setQuantidadeActual(itemEntradas.getQuantidadeActual() - item.getQuantidade());
+			
+
+		}
+
+		return repository.save(transferencia);
 	}
 
 	@Override
@@ -23,9 +64,9 @@ public class TransferenciaServiceImpl implements TransferenciaService{
 	}
 
 	@Override
-	public Page<ItemTransferencia> listar(Pageable paginacao) {
+	public Page<Transferencia> listar(Pageable paginacao) {
 		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll(paginacao);
 	}
 
 	@Override

@@ -45,6 +45,8 @@ public class EntradasExcel {
 		cell.setCellValue("Data Entrada");
 		cell = row.createCell(10);
 		cell.setCellValue("Tipo Entrada");
+		cell = row.createCell(11);
+		cell.setCellValue("Custo Entrada");
 		
 	}
 
@@ -80,7 +82,7 @@ public class EntradasExcel {
 // TDOS QUE JA VEM , AS DATAS FORNECEDORES, UTILIZADOR, DOACAO OU COMPRA, VALOR
 			rouCount ++;
 		}
-	}
+	}   
 
 	public void export(HttpServletResponse response) throws IOException {
 		writeHeaderRow();

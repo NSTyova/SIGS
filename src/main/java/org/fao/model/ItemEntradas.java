@@ -2,7 +2,6 @@ package org.fao.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +22,6 @@ public class ItemEntradas {
 	private Long id;
 	@Column(length = 50)
 	private Long quantidade;
-	@Column(unique = true)
 	private String lote;
 	private String codigo;
 	private LocalDate dataFabrico;

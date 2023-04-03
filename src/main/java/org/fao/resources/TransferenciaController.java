@@ -11,7 +11,7 @@ import org.fao.model.Transferencia;
 import org.fao.model.Utilizador;
 import org.fao.model.exception.NegocioException;
 import org.fao.model.exception.UtilizadorNaoEncontradoException;
-import org.fao.resources.DTO.ItemTransferenciaDTO;
+import org.fao.resources.DTO.TransferenciaDTO;
 import org.fao.resources.relatorios.JasperService;
 import org.fao.service.TransferenciaService;
 import org.fao.service.form.CancelarSolicitacao;
@@ -49,11 +49,11 @@ public class TransferenciaController {
 	private JasperService serviceJ;
 	
 	@GetMapping
-	public Page<ItemTransferenciaDTO> listar( @RequestParam int pagina, @RequestParam int qtd, @AuthenticationPrincipal Utilizador logado) {
+	public Page<TransferenciaDTO> listar( @RequestParam int pagina, @RequestParam int qtd, @AuthenticationPrincipal Utilizador logado) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
 
-			Page<ItemTransferencia> transferencia = service.listar(paginacao);
-			return ItemTransferenciaDTO.convert(transferencia);
+			Page<Transferencia> transferencia = service.listar(paginacao);
+			return TransferenciaDTO.convert(transferencia);
 		
 		
 	}
