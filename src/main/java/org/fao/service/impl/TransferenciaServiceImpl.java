@@ -7,9 +7,10 @@ import org.fao.model.ItemTransferencia;
 import org.fao.model.Productos;
 import org.fao.model.TipoProductos;
 import org.fao.model.Transferencia;
+import org.fao.model.exception.TransferenciaNaoEncontradoException;
 import org.fao.repository.ItemEntradasRepository;
+import org.fao.repository.ItemTransferenciaRepository;
 import org.fao.repository.ProductosRepository;
-import org.fao.repository.SolicitacaoRepository;
 import org.fao.repository.TipoProductosRepository;
 import org.fao.repository.TransferenciaRepository;
 import org.fao.service.TransferenciaService;
@@ -32,6 +33,9 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 	
 	@Autowired
 	private  ProductosRepository entradasRepository;
+	
+	@Autowired
+	private ItemTransferenciaRepository itRepository;
 
 	@Override
 	public Transferencia gravar(Transferencia transferencia) {
@@ -60,7 +64,7 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 	@Override
 	public Transferencia buscarOuFalhar(Long transferenciaId) {
 		// TODO Auto-generated method stub
-		return null;
+		return repository.findById(transferenciaId).orElseThrow(() -> new TransferenciaNaoEncontradoException(transferenciaId));
 	}
 
 	@Override
@@ -73,6 +77,12 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 	public Page<Transferencia> buscarPorNome(Pageable paginacao, String nome) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public List<ItemTransferencia> buscarPorId(List<Transferencia> dto) {
+		// TODO Auto-generated method stub
+		return itRepository.findByIdIn(dto);
 	}
 
 }

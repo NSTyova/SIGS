@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -28,6 +29,9 @@ public class Entradas {
 	private LocalDate dataEntrada= LocalDate.now();
 	private String tipoEntrada;
 	private boolean visibidade = true;
+	
+	@Transient
+	private Long transferencia;
 	
 	@ManyToOne
 	@JoinColumn(name = "utilizador")
@@ -91,7 +95,11 @@ public class Entradas {
 	public void setIten(List<ItemEntradas> iten) {
 		this.iten = iten;
 	}
-	
-	
+	public Long getTransferencia() {
+		return transferencia;
+	}
+	public void setTransferencia(Long transferencia) {
+		this.transferencia = transferencia;
+	}
 	
 }

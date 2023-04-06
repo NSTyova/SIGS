@@ -14,12 +14,14 @@ public class TransferenciaDTO {
 	private String origem;
 	private String destino;
 	private LocalDate dataRegistro;
+	private String estado;
 	
 	public TransferenciaDTO (Transferencia transferencia) {
 		this.id=transferencia.getId();
 		this.destino=transferencia.getDestino().getDescricao();
-		this.origem=transferencia.getDestino().getDescricao();
+		this.origem=transferencia.getOrigem().getDescricao();
 		this.dataRegistro=transferencia.getDataTransferencia();
+		this.estado=transferencia.getEstado();
 		
 	}
 	
@@ -38,5 +40,8 @@ public class TransferenciaDTO {
 	}
 	public String getDestino() {
 		return destino;
+	}
+	public String getEstado() {
+		return estado;
 	}
 }

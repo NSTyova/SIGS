@@ -6,5 +6,6 @@ public interface SolicitadaoSaidaProjections {
 	public String getPratileira();
 	public String getLote();
 	public Long getQuantidadeActual();
+	public Long getEntadas();
 	
 }

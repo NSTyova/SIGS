@@ -11,4 +11,6 @@ public interface EntradaService {
 	public Entradas buscarOuFalhar(Long entradaId);
 	public Page<Entradas> listar(Pageable paginacao);
 	public Page<Entradas>  buscarPorNome(Pageable paginacao,String nome);
+	// GRAVAR ENTRADAS QUE VIERAM DE TRANSFERENCIA
+	public Entradas gravarT(Entradas entradas);
 }

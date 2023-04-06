@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "TB_TRANSFERENCIA")
 public class Transferencia {
@@ -37,8 +39,8 @@ public class Transferencia {
 	@JoinColumn(name = "utilizador")
 	private Utilizador utilizador;
 	
-	
 	@ManyToMany(mappedBy = "transferencia", cascade = CascadeType.ALL)
+	@JsonBackReference("role")
 	private List<ItemTransferencia> iten = new ArrayList<ItemTransferencia>();
 
 

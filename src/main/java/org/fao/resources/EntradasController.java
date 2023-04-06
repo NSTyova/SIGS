@@ -75,6 +75,23 @@ public class EntradasController {
 
 	}
 	
+	@PostMapping(value = "transferencia")
+	@ResponseStatus(HttpStatus.CREATED)
+	public void adicionarT(@RequestBody Entradas entradas, HttpServletResponse response, @AuthenticationPrincipal Utilizador
+				utilizador) throws JRException, IOException {
+		//PEGAR O UTILIZADOR LOGADO
+		entradas.setUtilizador(utilizador);
+		//SALVAR O OBEJCTO
+		service.gravarT(entradas);
+		// ACAO QUE RETORNO O PDF QUANDO FEITO A INVERSAO DE UM VALORES NO BANCO DE DADOS
+		serviceJ.addParams("idEntradas", entradas.getId());
+		//byte[] bytes = serviceJ.exportPDSubF();
+		//response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+		
+		//response.getOutputStream().write(bytes);
+
+	}
+	
 	@GetMapping("/{entradasId}")
 	public Entradas buscar(@PathVariable Long entradasId) {
 		return service.buscarOuFalhar(entradasId);

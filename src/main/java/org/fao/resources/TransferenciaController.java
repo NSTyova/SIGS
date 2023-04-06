@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.fao.model.ItemSolicitacao;
 import org.fao.model.ItemTransferencia;
+import org.fao.model.Solicitacao;
 import org.fao.model.Transferencia;
 import org.fao.model.Utilizador;
 import org.fao.model.exception.NegocioException;
@@ -81,6 +82,16 @@ public class TransferenciaController {
 		
 		//response.getOutputStream().write(bytes);
 
+	}
+	
+	@GetMapping("/findBy/{id}")
+	public Transferencia buscarPorId(@PathVariable Long id) {
+		return service.buscarOuFalhar(id);
+	}
+	
+	@GetMapping("/{tId}")
+	public List<ItemTransferencia> buscar(@PathVariable List<Transferencia> tId) {
+		return service.buscarPorId(tId);
 	}
 
 	// CANCELAR UMA SOLICITACAO E SO MUDAR O ESTADO

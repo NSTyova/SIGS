@@ -25,7 +25,7 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 
 	
 	@Query(" SELECT ie.armario as armario, ie.quantidadeActual as quantidadeActual, "
-			+ " ie.lote as lote, ie.pratileira  as pratileira "
+			+ " ie.lote as lote, ie.pratileira  as pratileira, e.id as entadas "
 			+ " FROM  ItemEntradas ie INNER JOIN ie.entradas e "
 			+ " INNER JOIN e.deposito d"
 			+ " INNER JOIN ie.tipo t"
