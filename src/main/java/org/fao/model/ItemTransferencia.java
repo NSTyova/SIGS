@@ -1,5 +1,8 @@
 package org.fao.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +26,9 @@ public class ItemTransferencia {
 	private String armario;
 	private String pratileira;
 	private boolean visibidade=true;
+	private BigDecimal gramas;
+	private LocalDate dataFabrico;
+	private LocalDate dataValidade;
 	@ManyToOne
 	@JoinColumn(name = "productos")
 	private Productos productos;
@@ -124,4 +130,27 @@ public class ItemTransferencia {
 	public void setTipo(TipoProductos tipo) {
 		this.tipo = tipo;
 	}
+	public BigDecimal getGramas() {
+		return gramas;
+	}
+	public void setGramas(BigDecimal gramas) {
+		this.gramas = gramas;
+	}
+
+	public LocalDate getDataFabrico() {
+		return dataFabrico;
+	}
+
+	public void setDataFabrico(LocalDate dataFabrico) {
+		this.dataFabrico = dataFabrico;
+	}
+
+	public LocalDate getDataValidade() {
+		return dataValidade;
+	}
+
+	public void setDataValidade(LocalDate dataValidade) {
+		this.dataValidade = dataValidade;
+	}
+	
 }

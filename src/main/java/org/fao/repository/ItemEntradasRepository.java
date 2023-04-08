@@ -36,7 +36,7 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 
 	@Query("SELECT ie FROM ItemEntradas ie "
 			+ "WHERE ie.lote =:lote and ie.tipo=:tipos and "
-			+ " ie.productos=:prod")
+			+ " ie.productos=:prod and ie.quantidadeActual > 10")
 	ItemEntradas buscar(@Param("lote") String lote, @Param("prod") Productos prod, @Param("tipos") TipoProductos tipos);
 	
 	
