@@ -2,12 +2,14 @@ package org.fao.service.impl;
 
 import java.util.List;
 
+import org.fao.model.Deposito;
 import org.fao.model.ItemEntradas;
 import org.fao.model.ItemTransferencia;
 import org.fao.model.Productos;
 import org.fao.model.TipoProductos;
 import org.fao.model.Transferencia;
 import org.fao.model.exception.TransferenciaNaoEncontradoException;
+import org.fao.repository.DepositoRepository;
 import org.fao.repository.ItemEntradasRepository;
 import org.fao.repository.ItemTransferenciaRepository;
 import org.fao.repository.ProductosRepository;
@@ -32,10 +34,12 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 	private TipoProductosRepository tipoProductosRepository;
 	
 	@Autowired
-	private  ProductosRepository entradasRepository;
+	private  ProductosRepository productosRepository;
 	
 	@Autowired
 	private ItemTransferenciaRepository itRepository;
+	@Autowired
+	private DepositoRepository depositoRepository;
 
 	@Override
 	public Transferencia gravar(Transferencia transferencia) {
@@ -50,10 +54,15 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 			Long tipo = item.getTipo().getId();
 			TipoProductos tipos = tipoProductosRepository.getById(tipo);
 			Long produco = item.getProductos().getId();
-			Productos prod = entradasRepository.getById(produco);
+			Productos prod = productosRepository.getById(produco);
 			String lote = item.getLote();
+			
+			Long origem = item.getTransferencia().getOrigem().getId();
+			Deposito dep =depositoRepository.getById(origem); // PDOE SER APENAS UMA CONDIÇÃO
+			
+			
 			//AUMENTADO A CONDICAO PARA REVER A QUANTIDADE, AGORA FALTA PASSAR O DEPOSITO ORIGEM
-			ItemEntradas itemEntradas = itemEntradasRepository.buscar(lote, prod, tipos);// item entradas
+			ItemEntradas itemEntradas = itemEntradasRepository.buscarT(lote, prod, tipos, dep);// item entradas
 			itemEntradas.setQuantidadeActual(itemEntradas.getQuantidadeActual() - item.getQuantidade());
 		
 			
