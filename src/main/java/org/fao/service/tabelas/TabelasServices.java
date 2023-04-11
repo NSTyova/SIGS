@@ -32,7 +32,7 @@ public interface TabelasServices {
 	public List<SolicitacaoPorServicosProjections> solicitacaoServico();
 	
 	
-	// CARDS DE ENTRADAS E SAIDAS
+	// CARDS DE ENTRADAS E SAIDAS ACRESCENTRAR O CAMPO TRANSFERENCIA NESTE
 	public EntradasSaidasProjections entradasSaidas(Long deposito);
 	
 	// INVENTARIO DE ENTRADA

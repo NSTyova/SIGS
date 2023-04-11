@@ -7,6 +7,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -22,7 +23,7 @@ public class SaidasExcel {
 
 	private void writeHeaderRow() {
 		Row row = sheet.createRow(0);
-		
+
 		Cell cell = row.createCell(0);
 		cell.setCellValue("Medicamentos");
 		cell = row.createCell(1);
@@ -45,37 +46,47 @@ public class SaidasExcel {
 		cell.setCellValue("Utilizador que Registrou a Saida");
 		cell = row.createCell(9);
 		cell.setCellValue("Data Saida");
-		
+
+		// Crie um estilo de célula com proteção de célula
+		CellStyle cellStyle = workbook.createCellStyle();
+		cellStyle.setLocked(true); // Defina a proteção de célula como verdadeira
+		cell.setCellStyle(cellStyle); // Aplique o estilo à célula
+
+		// Proteja a planilha com uma senha (opcional)
+		sheet.protectSheet("senha"); // Substitua "senha" pela senha desejada
+
 	}
 
 	private void writeDataRow() {
-		int rouCount =1;
+		int rouCount = 1;
 		for (ItemSaida saidas : listaItemSaidas) {
-			
+
 			Row row = sheet.createRow(rouCount);
 			Cell cell = row.createCell(0);
 			cell.setCellValue(saidas.getProductos().getNome());
-			cell =row.createCell(1);
+			cell.setCellValue(saidas.getProductos().getNome() != null && !saidas.getProductos().getNome().isEmpty() ? saidas.getProductos().getNome() : "sem informacao"); // Substitui string vazia com "num"
+			cell = row.createCell(1);
 			cell.setCellValue(saidas.getTipo().getDescricao());
-			cell =row.createCell(2);
+			cell = row.createCell(2);
 			cell.setCellValue(saidas.getArmario());
-			cell =row.createCell(3);
+			cell = row.createCell(3);
 			cell.setCellValue(saidas.getPratileira());
-			cell =row.createCell(4);
+			//cell.setCellValue(valorNumerico != null && valorNumerico != 0 ? valorNumerico : 0);
+			cell = row.createCell(4);
 			cell.setCellValue(saidas.getLote());
-			cell =row.createCell(5);
+			cell = row.createCell(5);
 			cell.setCellValue(saidas.getQuanditade());
-			cell =row.createCell(6);
+			cell = row.createCell(6);
 			cell.setCellValue(saidas.getSaidas().getSolicitacao().getServicos().getNome());
-			cell =row.createCell(7);
+			cell = row.createCell(7);
 			cell.setCellValue(saidas.getSaidas().getSolicitacao().getSolicitante().getName());
-			cell =row.createCell(8);
+			cell = row.createCell(8);
 			cell.setCellValue(saidas.getSaidas().getSolicitacao().getAprovou().getName());
-			cell =row.createCell(9);
+			cell = row.createCell(9);
 			cell.setCellValue(saidas.getSaidas().getUtlizador().getName());
-			cell =row.createCell(10);
+			cell = row.createCell(10);
 			cell.setCellValue(saidas.getSaidas().getDataRegistro());
-			rouCount ++;
+			rouCount++;
 		}
 	}
 
@@ -88,15 +99,12 @@ public class SaidasExcel {
 		outputStream.close();
 	}
 
-	
-	// validar um método para adcionar uma lista antes de chamar para para preencher o excel..
+	// validar um método para adcionar uma lista antes de chamar para para preencher
+	// o excel..
 	public SaidasExcel(List<ItemSaida> listaSaidas) {
 		this.listaItemSaidas = listaSaidas;
-		workbook= new XSSFWorkbook();
-		sheet= workbook.createSheet();
+		workbook = new XSSFWorkbook();
+		sheet = workbook.createSheet();
 	}
-	
-	
-	
 
 }

@@ -17,7 +17,9 @@ public interface ItemSaidasRepository extends JpaRepository<ItemSaida, Long>{
 
 	@Query("SELECT COUNT(DISTINCT s.id) as saidas,"
 			+ " (SELECT COUNT(e) FROM Entradas e INNER JOIN e.deposito d "
-			+ " WHERE d.id=:deposito)  as entradas"
+			+ " WHERE d.id=:deposito and  e.tipoEntrada  <>'Transferencia')  as entradas, "
+			+ " (SELECT COUNT(e) FROM Entradas e INNER JOIN e.deposito d "
+			+ " WHERE d.id=:deposito and  e.tipoEntrada ='Transferencia')    as  transferidos"
 			+ " FROM ItemSaida its INNER JOIN its.saidas s "
 			+ "	INNER JOIN  its.deposito dd "
 			+ " WHERE dd.id=: deposito")

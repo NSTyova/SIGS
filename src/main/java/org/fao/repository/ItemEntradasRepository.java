@@ -25,7 +25,8 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 	@Query(" SELECT ie.armario as armario, ie.quantidadeActual as quantidadeActual, "
 			+ " ie.lote as lote, ie.pratileira  as pratileira, e.id as entadas "
 			+ " FROM  ItemEntradas ie INNER JOIN ie.entradas e " 
-			+ " INNER JOIN e.deposito d" + " INNER JOIN ie.tipo t"
+			+ " INNER JOIN e.deposito d"
+			+ " INNER JOIN ie.tipo t"
 			+ " INNER JOIN ie.productos p "
 			+ " WHERE p.id=:producto and t.id=:tipo and d.id=:deposito and ie.gramas=:gramas")
 	List<SolicitadaoSaidaProjections> listaSaidas(@Param("producto") Long producto, @Param("tipo") Long tipo,
@@ -34,7 +35,7 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 	// MEDTIDO PARA AS SAIDAS
 	@Query("SELECT ie FROM ItemEntradas ie " 
 			+ "WHERE ie.lote =:lote and ie.tipo=:tipos and "
-			+ " ie.productos=:prod and ie.quantidadeActual > 10")
+			+ " ie.productos=:prod ")
 	ItemEntradas buscar(@Param("lote") String lote, @Param("prod") Productos prod, @Param("tipos") TipoProductos tipos);
 
 	// METODO PARA FAZER O DESCONTO NAS QUANTIDADE NA QUESTAO DAS TRANSFERENCIA

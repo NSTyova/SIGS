@@ -4,4 +4,5 @@ public interface EntradasSaidasProjections {
 
 	public String getEntradas();
 	public String getSaidas();
+	public String getTransferidos();
 }
