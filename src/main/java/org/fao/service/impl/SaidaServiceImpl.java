@@ -51,19 +51,28 @@ public class SaidaServiceImpl implements SaidasService {
 			TipoProductos tipos = tipoProductosRepository.getById(tipo);
 			Long produco = itemSaida.getProductos().getId();
 			Productos prod = entradasRepository.getById(produco);
+			
 			String lote =itemSaida.getLote();
-			ItemEntradas item = itemEntradasRepository.buscar(lote, prod, tipos);// item entradas
+			//String prat = itemSaida.getPratileira();
+			//String arm = itemSaida.getArmario();
+			
+			ItemEntradas item = itemEntradasRepository.buscar(lote, prod, tipos);
+			
 			item.setQuantidadeActual(item.getQuantidadeActual() - itemSaida.getQuanditade());
 			itemSaida.setEntradas(item.getEntradas());
 			
+			
+			
 		}
 		
-		
+		// MUDAR O  ESTADO DA SOLICITAÇÃO PARA FINALIZADO QUANDO TERMINAR A ACCÇÃO
 		Long idSolicitacao = saidas.getSolicitacao().getId();
 		Solicitacao solicitacao = solicitacaoRepository.getById(idSolicitacao);
 		if(solicitacao.getId().equals(idSolicitacao)) {
 			solicitacao.setEstado("Finalizada");
 		}
+		
+		
 		
 		return  repository.save(saidas);
 		

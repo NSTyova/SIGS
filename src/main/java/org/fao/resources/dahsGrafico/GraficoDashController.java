@@ -8,6 +8,8 @@ import org.fao.projections.ProductoEntregeCancelados;
 import org.fao.projections.ProductosCategorias;
 import org.fao.projections.ProductosQTDSaidaDia;
 import org.fao.service.dash.DashGraficaService;
+import org.fao.service.projections.ProductoMaisSolicitados;
+import org.fao.service.projections.SolicitacoaQDT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,34 +22,35 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 public class GraficoDashController {
 
-	/*@Autowired
+	@Autowired
 	private DashGraficaService dashGraficaService;
 	
-	@GetMapping
+	/*@GetMapping
 	public List<ProductoEntregeCancelados> productos(@AuthenticationPrincipal Utilizador logado){
 		String utilizador = logado.getNomeLogin();
 		// falta quantidade entregues e cancelados 
 		return dashGraficaService.productos(utilizador);
 	}
 	
+	*/
 	
-	@GetMapping(value = "qtdCategorias")
-	public List<ProductosCategorias> produsctoCategoruas(){
-		return dashGraficaService.qtdProductos();
+	
+	@GetMapping
+	public  List<SolicitacoaQDT> limitados(@AuthenticationPrincipal Utilizador logado){
+		// trazer
+		String utilizador = logado.getEmail();
+		return dashGraficaService.limitados(utilizador);
 	}
 	
-	@GetMapping(value = "saidasProductos")
-	public List<ProductosQTDSaidaDia> productosSaidos(@AuthenticationPrincipal Utilizador logado){
-		// trazer
-		String utilizador = logado.getNomeLogin();
-		System.out.println("Utilizador Logado :"+ logado.getNomeLogin());
-		return dashGraficaService.limitados(utilizador);
+	@GetMapping(value="/solicitacao")
+	public  List<ProductoMaisSolicitados> productosMSolicitados(@AuthenticationPrincipal Utilizador logado){
+		String utilizador = logado.getEmail();
+		return dashGraficaService.productosMSolicitados(utilizador);
 	}
 	
 	@GetMapping(value = "cards")
 	public CardsSaidaEntradaPaciente cards(@AuthenticationPrincipal Utilizador logado){
-		String utilizador = logado.getNomeLogin();
-		System.out.println("Utilizador Logado :"+ logado.getNomeLogin());
+		String utilizador = logado.getEmail();
 		 return dashGraficaService.card(utilizador);
 	}
 	

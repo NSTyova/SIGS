@@ -33,10 +33,35 @@ public interface ItemEntradasRepository extends JpaRepository<ItemEntradas, Long
 			@Param("deposito") Long deposito, @Param("gramas") BigDecimal gramas);
 
 	// MEDTIDO PARA AS SAIDAS
-	@Query("SELECT ie FROM ItemEntradas ie " 
+	/*@Query("SELECT top 1 ie FROM ItemEntradas ie " 
 			+ "WHERE ie.lote =:lote and ie.tipo=:tipos and "
 			+ " ie.productos=:prod ")
-	ItemEntradas buscar(@Param("lote") String lote, @Param("prod") Productos prod, @Param("tipos") TipoProductos tipos);
+	@Query(value=" SELECT top 1 it.*  "
+			+ " FROM tb_item_entradas it "
+			+ " inner join tb_productos p on (it.productos=p.id_producto) "
+			+ " inner join tb_tipo_producto tp on (it.tipo=tp.id_tipo_prodcuto) "
+			+ " WHERE  quantidade_actual = ( "
+			+ "    SELECT MAX(quantidade_actual) "
+			+ "    FROM tb_item_entradas "
+			+ " ) and p.id_producto=:prod and tp.id_tipo_prodcuto=:tipos and it.lote=:lote "
+			+ "ORDER BY id ASC;  ", nativeQuery=true)*/
+	@Query(value="SELECT TOP 1 it.* FROM tb_item_entradas it "
+			+ " INNER JOIN tb_productos p ON it.productos = p.id_producto "
+			+ " INNER JOIN tb_tipo_producto tp ON it.tipo = tp.id_tipo_prodcuto "
+			+ " WHERE p.id_producto =:prod "
+			+ " AND tp.id_tipo_prodcuto =:tipos "
+			+ " AND it.lote =:lote "
+			+ " AND it.quantidade_actual = ( SELECT MAX(quantidade_actual) "
+			+ "    FROM tb_item_entradas "
+			+ "    INNER JOIN tb_productos p ON tb_item_entradas.productos = p.id_producto "
+			+ "    INNER JOIN tb_tipo_producto tp ON tb_item_entradas.tipo = tp.id_tipo_prodcuto "
+			+ "    WHERE p.id_producto =:prod "
+			+ "    AND tp.id_tipo_prodcuto =:tipos "
+			+ "    AND tb_item_entradas.lote =:lote  "
+			+ ") "
+			+ "ORDER BY it.id ASC ", nativeQuery=true)
+	ItemEntradas buscar(@Param("lote") String lote, @Param("prod") Productos prod,
+				@Param("tipos") TipoProductos tipos);
 
 	// METODO PARA FAZER O DESCONTO NAS QUANTIDADE NA QUESTAO DAS TRANSFERENCIA
 	@Query("SELECT ie FROM ItemEntradas ie "

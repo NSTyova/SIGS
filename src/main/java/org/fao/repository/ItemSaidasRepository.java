@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.fao.model.ItemEntradas;
 import org.fao.model.ItemSaida;
+import org.fao.projections.CardsSaidaEntradaPaciente;
 import org.fao.service.projections.EntradasSaidasProjections;
 import org.fao.service.projections.InventarioSaidasProjections;
 import org.springframework.data.domain.Page;
@@ -52,5 +53,23 @@ public interface ItemSaidasRepository extends JpaRepository<ItemSaida, Long>{
 			+ " WHERE d.id=:deposito  and s.dataRegistro BETWEEN :dataInicio and :dataFim")
 			public List<ItemSaida> inventarioExel(@Param("deposito") Long deposito,@Param("dataInicio") LocalDate dataInicio, 
 																	  @Param("dataFim")LocalDate dataFim);
+
+	// CARDAS POR USER LOGADOS
+	@Query(value =" select count(*) as saidas, "
+			+ " (select COUNT(*) from tb_entradas e "
+			+ " INNER JOIN tb_utilizador u ON (e.utilizador =u.id) "
+			+ " where tipo_entrada <> 'Transferencia' and e.data_entrada= CONVERT(date, GETDATE()) "
+			+ " and u.email like :utilizador "
+			+ " ) as entradas, "
+			+ " (select COUNT(*) from tb_entradas e "
+			+ " INNER JOIN tb_utilizador u ON (e.utilizador =u.id) "
+			+ " where tipo_entrada = 'Transferencia' and e.data_entrada= CONVERT(date, GETDATE()) "
+			+ " and u.email like :utilizador "
+			+ " ) as transferencias "
+			+ " from tb_saidas s "
+			+ " INNER JOIN tb_utilizador u ON (s.utlizador =u.id) "
+			+ " where s.data_registro= CONVERT(date, GETDATE()) "
+			+ " and u.email like :utilizador", nativeQuery=true)
+	public CardsSaidaEntradaPaciente cards(String utilizador);
 	
 }

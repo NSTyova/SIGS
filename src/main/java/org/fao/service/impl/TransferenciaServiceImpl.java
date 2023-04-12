@@ -57,12 +57,12 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 			Productos prod = productosRepository.getById(produco);
 			String lote = item.getLote();
 			
-			Long origem = item.getTransferencia().getOrigem().getId();
-			Deposito dep =depositoRepository.getById(origem); // PDOE SER APENAS UMA CONDIÇÃO
+			//Long origem = item.getTransferencia().getOrigem().getId();
+			//Deposito dep =depositoRepository.getById(origem); // PDOE SER APENAS UMA CONDIÇÃO
 			
 			
 			//AUMENTADO A CONDICAO PARA REVER A QUANTIDADE, AGORA FALTA PASSAR O DEPOSITO ORIGEM
-			ItemEntradas itemEntradas = itemEntradasRepository.buscarT(lote, prod, tipos, dep);// item entradas
+			ItemEntradas itemEntradas = itemEntradasRepository.buscar(lote, prod, tipos);// item entradas
 			itemEntradas.setQuantidadeActual(itemEntradas.getQuantidadeActual() - item.getQuantidade());
 		
 			
