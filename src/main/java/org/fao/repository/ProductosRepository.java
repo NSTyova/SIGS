@@ -1,9 +1,16 @@
 package org.fao.repository;
 
 import org.fao.model.Productos;
+import org.fao.resources.DTO.ProductosDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface ProductosRepository extends JpaRepository<Productos, Long>{
+	
+	@Query(value="select p from Productos p where upper(trim(p.nome)) like ?1%")
+	Page<ProductosDTO> findByNome(String nome, Pageable paginacao);
 /*
 	// pesquisar pelo codigo para o estoque
 	

@@ -1,5 +1,6 @@
 package org.fao.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.fao.model.ItemSolicitacao;
@@ -79,6 +80,12 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	@Override
 	public Page<Solicitacao> listarAprovados(Pageable paginacao) {
 		return repository.listarAprovados(paginacao);
+	}
+
+	@Override
+	public List<Solicitacao> buscarPorEstadosDatas(String  estado, LocalDate dataEntrada, LocalDate dataFim) {
+		// TODO Auto-generated method stub
+		return repository.buscarEstadoDatas(estado, dataEntrada, dataFim);
 	}
 
 	

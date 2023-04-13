@@ -1,7 +1,9 @@
 package org.fao.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import org.fao.model.ItemEntradas;
 import org.fao.model.ItemSolicitacao;
 import org.fao.model.Solicitacao;
 import org.fao.service.form.EditarSolicitacao;
@@ -23,5 +25,8 @@ public interface SolicitacaoService {
 	
 	// LISTAR OS APROVADOS
 	public Page<Solicitacao> listarAprovados(Pageable paginacao);
+	
+	// BUSCAR AS SOLICATACOES POR ESTADOS E INTVERVALO DE DADOS
+	public List<Solicitacao> buscarPorEstadosDatas(String estado, LocalDate dataEntrada, LocalDate dataFim);
 	
 }

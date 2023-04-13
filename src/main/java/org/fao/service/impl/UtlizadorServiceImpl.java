@@ -26,7 +26,7 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 
 	@Override
 	public Utilizador gravar(Utilizador u) {
-		u.setSenha(passwordEncoder.encode(u.getPassword()));
+		//u.setSenha(passwordEncoder.encode(u.getPassword()));
 		return repository.save(u);
 	}
 
@@ -57,7 +57,7 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 			//throw new Ne
 			// PASSAR AQUI UMA EXCPECAO PARA INFORMAR QUE AS SENHA NAO SAO IUGUAS
 		}
-		utilizador.setSenha(passwordEncoder.encode(novaSenha));
+		//utilizador.setSenha(passwordEncoder.encode(novaSenha));
 	}
 
 	@Override

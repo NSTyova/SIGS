@@ -1,5 +1,6 @@
 package org.fao.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.fao.model.ItemSolicitacao;
@@ -20,4 +21,8 @@ public interface TransferenciaService {
 	
 	// BUSCAR POR ID TRANSFERENCA
 	public List<ItemTransferencia> buscarPorId(List<Transferencia> dto);
+	
+	
+	// BUSCAR AS Transferencia  POR INTVERVALO DE DADOS
+	public List<Transferencia> buscarPorEstadosDatas(LocalDate dataEntrada, LocalDate dataFim);
 }

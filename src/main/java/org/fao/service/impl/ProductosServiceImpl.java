@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.fao.model.Productos;
 import org.fao.model.exception.ProductosNaoEncontradoException;
 import org.fao.repository.ProductosRepository;
+import org.fao.resources.DTO.ProductosDTO;
 import org.fao.service.ProductosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,6 +47,13 @@ public class ProductosServiceImpl implements ProductosService {
 		//return repository.findByCodigo(codigo);
 	}
 
+
+	@Override
+	public Page<ProductosDTO> buscarPorNomes(String nome, Pageable paginacao) {
+		return repository.findByNome(nome, paginacao);
+	}
+
+	
 
 
 }

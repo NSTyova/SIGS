@@ -3,6 +3,7 @@ package org.fao.service;
 import java.util.Optional;
 
 import org.fao.model.Productos;
+import org.fao.resources.DTO.ProductosDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,6 @@ public interface ProductosService {
 	public Page<Productos> listar(Pageable paginacao);
 	public Page<Productos>  buscarPorCodigo(Pageable paginacao,String codigo);
 	public Optional<Productos> buscarCodigo(String codigo); 
+	public Page<ProductosDTO> buscarPorNomes(String nome, Pageable paginacao);
 	
 }

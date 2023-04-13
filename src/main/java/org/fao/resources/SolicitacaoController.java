@@ -2,10 +2,12 @@ package org.fao.resources;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.fao.model.ItemSaida;
 import org.fao.model.ItemSolicitacao;
 import org.fao.model.Solicitacao;
 import org.fao.model.Utilizador;
@@ -15,6 +17,7 @@ import org.fao.resources.DTO.ItemSolicitacaoDTO;
 import org.fao.resources.DTO.SolicitacaoDTO;
 import org.fao.resources.relatorios.JasperService;
 import org.fao.service.SolicitacaoService;
+import org.fao.service.dtoExcel.SaidasExcel;
 import org.fao.service.form.CancelarSolicitacao;
 import org.fao.service.form.EditarSolicitacao;
 import org.fao.service.form.RemoverProducto;
@@ -23,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -136,5 +140,14 @@ public class SolicitacaoController {
 	@GetMapping(value="solicitacao/{solicitacaoId}")
 	public List<ItemSolicitacao> buscarIdAprovados(@PathVariable List<Solicitacao> solicitacaoId) {
 		return service.buscarPorAprovados(solicitacaoId);
+	}
+	
+	
+	// BUSCAR ESTADO EM INTERVALO DE DATAS
+	@GetMapping("/estado")
+	public List<Solicitacao> buscarPorEstadosDatas(@RequestParam String estado,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
+		return	service.buscarPorEstadosDatas(estado, dataInicio, dataFim);
 	}
 }

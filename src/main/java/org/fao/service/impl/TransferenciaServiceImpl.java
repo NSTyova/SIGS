@@ -1,5 +1,6 @@
 package org.fao.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.fao.model.Deposito;
@@ -94,6 +95,12 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 	public List<ItemTransferencia> buscarPorId(List<Transferencia> dto) {
 		// TODO Auto-generated method stub
 		return itRepository.findByIdIn(dto);
+	}
+
+	@Override
+	public List<Transferencia> buscarPorEstadosDatas(LocalDate dataEntrada, LocalDate dataFim) {
+		// TODO Auto-generated method stub
+		return repository.buscarDatas(dataEntrada, dataFim);
 	}
 
 }

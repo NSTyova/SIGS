@@ -26,12 +26,12 @@ public interface ItemSolicitacaoRepository  extends JpaRepository<ItemSolicitaca
 	List<ItemSolicitacao> findAprovados( @Param("solicitacao") List<Solicitacao> solicitacao);
 	
 
-	@Query(value="SELECT  p.nome AS productos, COUNT(*) AS qtd "
+	@Query(value="SELECT top 10  p.nome AS productos, COUNT(*) AS qtd "
 			+ " FROM tb_item_solicitacao s "
 			+ " INNER JOIN tb_productos p ON s.productos = p.id_producto "
 			+ " INNER JOIN tb_solicitacao ss on s.solicitacao=ss.id "
 			+ " INNER  JOIN tb_utilizador u ON (ss.solicitante =u.id) "
-			+ " WHERE u.email  like :utlizador "
+			+ " WHERE u.email  like :utlizador  and  ss.data_solicitacao= CONVERT(date, GETDATE())"
 			+ " GROUP BY p.nome "
 			+ " ORDER BY qtd DESC ", nativeQuery=true)
 	public List<ProductoMaisSolicitados> productosMSolicitados(String utlizador);

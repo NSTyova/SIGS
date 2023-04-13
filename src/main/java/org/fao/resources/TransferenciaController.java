@@ -1,6 +1,7 @@
 package org.fao.resources;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -110,6 +112,15 @@ public class TransferenciaController {
 
 	}
 
+	
+	// BUSCAR ESTADO EM INTERVALO DE DATAS
+	@GetMapping("/porDatas")
+	public List<Transferencia> buscarPorEstadosDatas(
+				@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+				@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
+			return	service.buscarPorEstadosDatas( dataInicio, dataFim);
+	}
+	
 	/*
 	
 	@PutMapping("/{id}")

@@ -46,6 +46,15 @@ public class ProductosController {
 			return ProductosDTO.convert(productos);
 		}
 	}
+	
+	@GetMapping(value = "/search")
+	public Page<ProductosDTO> buscarPorNome(@RequestParam String nome, @RequestParam int pagina,
+			@RequestParam int qtd) {
+		Pageable paginacao = PageRequest.of(pagina, qtd);
+
+			return service.buscarPorNomes(nome, paginacao);
+	} 
+	
 
 
 	@PostMapping
