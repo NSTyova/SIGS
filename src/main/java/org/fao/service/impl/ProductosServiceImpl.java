@@ -1,5 +1,6 @@
 package org.fao.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.fao.model.Productos;
@@ -49,8 +50,8 @@ public class ProductosServiceImpl implements ProductosService {
 
 
 	@Override
-	public Page<ProductosDTO> buscarPorNomes(String nome, Pageable paginacao) {
-		return repository.findByNome(nome, paginacao);
+	public List<ProductosDTO> buscarPorNomes(String nome) {
+		return repository.findByNome(nome);
 	}
 
 	

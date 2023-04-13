@@ -21,6 +21,6 @@ public interface TransferenciaRepository extends JpaRepository<Transferencia, Lo
 		@Query("SELECT t "
 			+ " FROM Transferencia t " 
 			+ " WHERE t.dataTransferencia BETWEEN :dataInicio and :dataFim")
-		public List<Transferencia> buscarDatas( @Param("dataInicio") LocalDate dataInicio, @Param("dataFim") LocalDate dataFim);
+		public List<Transferencia> buscarDatas(Pageable paginacao, @Param("dataInicio") LocalDate dataInicio, @Param("dataFim") LocalDate dataFim);
 
 }

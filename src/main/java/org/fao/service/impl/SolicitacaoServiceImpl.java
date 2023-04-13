@@ -83,9 +83,9 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
 	}
 
 	@Override
-	public List<Solicitacao> buscarPorEstadosDatas(String  estado, LocalDate dataEntrada, LocalDate dataFim) {
+	public Page<Solicitacao> buscarPorEstadosDatas(Pageable paginacao, String  estado, LocalDate dataEntrada, LocalDate dataFim) {
 		// TODO Auto-generated method stub
-		return repository.buscarEstadoDatas(estado, dataEntrada, dataFim);
+		return repository.buscarEstadoDatas(paginacao, estado, dataEntrada, dataFim);
 	}
 
 	

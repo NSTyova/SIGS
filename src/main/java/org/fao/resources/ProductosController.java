@@ -1,5 +1,6 @@
 package org.fao.resources;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.fao.model.Productos;
@@ -48,11 +49,9 @@ public class ProductosController {
 	}
 	
 	@GetMapping(value = "/search")
-	public Page<ProductosDTO> buscarPorNome(@RequestParam String nome, @RequestParam int pagina,
-			@RequestParam int qtd) {
-		Pageable paginacao = PageRequest.of(pagina, qtd);
-
-			return service.buscarPorNomes(nome, paginacao);
+	public List<ProductosDTO> buscarPorNome(@RequestParam String nome) {
+		
+			return service.buscarPorNomes(nome);
 	} 
 	
 

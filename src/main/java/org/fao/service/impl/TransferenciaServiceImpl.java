@@ -98,9 +98,9 @@ public class TransferenciaServiceImpl implements TransferenciaService {
 	}
 
 	@Override
-	public List<Transferencia> buscarPorEstadosDatas(LocalDate dataEntrada, LocalDate dataFim) {
+	public List<Transferencia> buscarPorEstadosDatas(Pageable paginacao,LocalDate dataEntrada, LocalDate dataFim) {
 		// TODO Auto-generated method stub
-		return repository.buscarDatas(dataEntrada, dataFim);
+		return repository.buscarDatas(paginacao, dataEntrada, dataFim);
 	}
 
 }

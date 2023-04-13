@@ -145,9 +145,12 @@ public class SolicitacaoController {
 	
 	// BUSCAR ESTADO EM INTERVALO DE DATAS
 	@GetMapping("/estado")
-	public List<Solicitacao> buscarPorEstadosDatas(@RequestParam String estado,
+	public Page<Solicitacao> buscarPorEstadosDatas(
+			@RequestParam int pagina, @RequestParam int qtd,
+			@RequestParam String estado,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
-		return	service.buscarPorEstadosDatas(estado, dataInicio, dataFim);
+		Pageable paginacao = PageRequest.of(pagina, qtd);
+		return	service.buscarPorEstadosDatas(paginacao ,estado, dataInicio, dataFim);
 	}
 }

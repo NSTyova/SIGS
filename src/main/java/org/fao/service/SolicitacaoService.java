@@ -27,6 +27,6 @@ public interface SolicitacaoService {
 	public Page<Solicitacao> listarAprovados(Pageable paginacao);
 	
 	// BUSCAR AS SOLICATACOES POR ESTADOS E INTVERVALO DE DADOS
-	public List<Solicitacao> buscarPorEstadosDatas(String estado, LocalDate dataEntrada, LocalDate dataFim);
+	public Page<Solicitacao> buscarPorEstadosDatas(Pageable paginacao,String estado, LocalDate dataEntrada, LocalDate dataFim);
 	
 }

@@ -116,9 +116,11 @@ public class TransferenciaController {
 	// BUSCAR ESTADO EM INTERVALO DE DATAS
 	@GetMapping("/porDatas")
 	public List<Transferencia> buscarPorEstadosDatas(
+				@RequestParam int pagina, @RequestParam int qtd,
 				@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
 				@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
-			return	service.buscarPorEstadosDatas( dataInicio, dataFim);
+		Pageable paginacao = PageRequest.of(pagina, qtd);
+			return	service.buscarPorEstadosDatas(paginacao, dataInicio, dataFim);
 	}
 	
 	/*

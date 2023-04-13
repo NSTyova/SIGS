@@ -48,7 +48,7 @@ public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long>{
 		@Query("SELECT s "
 				+ " FROM Solicitacao s " 
 				+ " WHERE s.estado=:estados and s.dataSolicitacao BETWEEN :dataInicio and :dataFim")
-		public List<Solicitacao> buscarEstadoDatas(@Param("estados") String estado,
+		public Page<Solicitacao> buscarEstadoDatas(Pageable paginacao, @Param("estados") String estado,
 				@Param("dataInicio") LocalDate dataInicio, @Param("dataFim") LocalDate dataFim);
 
 

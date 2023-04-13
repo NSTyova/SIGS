@@ -1,5 +1,6 @@
 package org.fao.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.fao.model.Productos;
@@ -16,6 +17,6 @@ public interface ProductosService {
 	public Page<Productos> listar(Pageable paginacao);
 	public Page<Productos>  buscarPorCodigo(Pageable paginacao,String codigo);
 	public Optional<Productos> buscarCodigo(String codigo); 
-	public Page<ProductosDTO> buscarPorNomes(String nome, Pageable paginacao);
+	public List<ProductosDTO> buscarPorNomes(String nome);
 	
 }

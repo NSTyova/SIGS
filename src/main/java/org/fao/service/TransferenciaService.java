@@ -24,5 +24,5 @@ public interface TransferenciaService {
 	
 	
 	// BUSCAR AS Transferencia  POR INTVERVALO DE DADOS
-	public List<Transferencia> buscarPorEstadosDatas(LocalDate dataEntrada, LocalDate dataFim);
+	public List<Transferencia> buscarPorEstadosDatas(Pageable paginacao, LocalDate dataEntrada, LocalDate dataFim);
 }
