@@ -1,5 +1,4 @@
 package org.fao.resources;
-
 import javax.validation.Valid;
 
 import org.fao.model.Utilizador;

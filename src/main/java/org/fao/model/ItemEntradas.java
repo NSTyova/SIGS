@@ -27,7 +27,7 @@ public class ItemEntradas {
 	private LocalDate dataFabrico;
 	private LocalDate dataValidade;
 	private BigDecimal gramas;
-	private BigDecimal custoLotes;
+	private BigDecimal custoLotes =new BigDecimal(0.0);
 	@Column(length = 50)
 	private String pratileira;
 	@Column(length = 50)

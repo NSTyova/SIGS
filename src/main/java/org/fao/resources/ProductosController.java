@@ -11,10 +11,13 @@ import org.fao.service.ProductosService;
 import org.fao.service.form.ProductoUpdate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +38,8 @@ public class ProductosController {
 	private ProductosService service;
 
 	@GetMapping
+	@Cacheable(value="listaProductos") // CACHE DOS DADOS
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<ProductosDTO> listar(@RequestParam(required = false) String codigo, @RequestParam int pagina,
 			@RequestParam int qtd) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
@@ -49,6 +54,7 @@ public class ProductosController {
 	}
 	
 	@GetMapping(value = "/search")
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public List<ProductosDTO> buscarPorNome(@RequestParam String nome) {
 		
 			return service.buscarPorNomes(nome);
@@ -58,6 +64,8 @@ public class ProductosController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@CacheEvict(value="listaProductos" , allEntries = true) // LIMPAR O CACHE DEPOIS DE UMA INSERCAO
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Productos adicionar(@RequestBody Productos productos) {
 		try {
 		
@@ -69,6 +77,8 @@ public class ProductosController {
 
 	@PutMapping("/{productosId}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
+	@CacheEvict(value="listaProductos" , allEntries = true) // LIMPAR O CACHE DEPOIS DE UMA INSERCAO
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Productos atualizar(@PathVariable Long productosId, @RequestBody Productos productos) {
 		try {
 			Productos clienteActual = service.buscarOuFalhar(productosId);
@@ -82,6 +92,8 @@ public class ProductosController {
 	
 	@PutMapping("/editar/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
+	@CacheEvict(value="listaProductos" , allEntries = true) // LIMPAR O CACHE DEPOIS DE UMA INSERCAO
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Productos alterarQTD(@PathVariable Long id, @RequestBody ProductoUpdate productos) {
 		try {
 			
@@ -98,11 +110,13 @@ public class ProductosController {
 	}
 	
 	@GetMapping("/{productosId}")
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Productos buscar(@PathVariable Long productosId) {
 		return service.buscarOuFalhar(productosId);
 	}
 	
 	@GetMapping(value = "/buscar")
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Optional<Productos> buscarPorCodigo( String codigo) { 
 		return service.buscarCodigo(codigo);
 	}

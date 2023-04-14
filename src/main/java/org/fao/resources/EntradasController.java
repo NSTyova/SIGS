@@ -14,10 +14,13 @@ import org.fao.resources.DTO.EstoqueDTO;
 import org.fao.resources.relatorios.JasperService;
 import org.fao.service.EntradaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +47,8 @@ public class EntradasController {
 	
 	
 	@GetMapping
+	@Cacheable(value="listaEntradas") // CACHE DOS DADOS 
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<EntradasDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,
 			@RequestParam int qtd) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
@@ -60,6 +65,8 @@ public class EntradasController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@Cacheable(value="listaEntradas") // CACHE DOS DADOS
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public void adicionar(@RequestBody Entradas entradas, HttpServletResponse response, @AuthenticationPrincipal Utilizador
 				utilizador) throws JRException, IOException {
 		//PEGAR O UTILIZADOR LOGADO
@@ -77,6 +84,8 @@ public class EntradasController {
 	
 	@PostMapping(value = "transferencia")
 	@ResponseStatus(HttpStatus.CREATED)
+	@CacheEvict(value="listaEntradas" , allEntries = true) // LIMPAR O CACHE DEPOIS DE UMA INSERCAO
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public void adicionarT(@RequestBody Entradas entradas, HttpServletResponse response, @AuthenticationPrincipal Utilizador
 				utilizador) throws JRException, IOException {
 		//PEGAR O UTILIZADOR LOGADO
@@ -93,6 +102,8 @@ public class EntradasController {
 	}
 	
 	@GetMapping("/{entradasId}")
+	@CacheEvict(value="listaEntradas" , allEntries = true) // LIMPAR O CACHE DEPOIS DE UMA INSERCAO
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Entradas buscar(@PathVariable Long entradasId) {
 		return service.buscarOuFalhar(entradasId);
 	}

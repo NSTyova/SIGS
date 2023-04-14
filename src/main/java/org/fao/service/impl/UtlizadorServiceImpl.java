@@ -26,7 +26,7 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 
 	@Override
 	public Utilizador gravar(Utilizador u) {
-		//u.setSenha(passwordEncoder.encode(u.getPassword()));
+		u.setSenha(passwordEncoder.encode(u.getPassword()));
 		return repository.save(u);
 	}
 

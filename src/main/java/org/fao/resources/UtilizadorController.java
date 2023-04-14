@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,7 @@ public class UtilizadorController {
 	private UtilizadorService service;
 
 	@GetMapping
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<UtilizadorDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,
 			@RequestParam int qtd) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
@@ -52,6 +54,7 @@ public class UtilizadorController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Utilizador adicionar(@RequestBody @Valid Utilizador utilizador) {
 		try {
 			return service.gravar(utilizador);
@@ -63,6 +66,7 @@ public class UtilizadorController {
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	//@PreAuthorize("hasAnyAuthority('Editar_Usuarios')")
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Utilizador atualizar(@PathVariable Long id, @RequestBody EditarUsuario editarUsuario) {
 		try {
 			Utilizador usuariooAtual = service.buscarOuFalhar(id);
@@ -74,6 +78,7 @@ public class UtilizadorController {
 	}
 
 	@GetMapping("/{utilizdorId}")
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Utilizador buscar(@PathVariable Long utilizdorId) {
 		return service.buscarOuFalhar(utilizdorId);
 	}
@@ -81,6 +86,7 @@ public class UtilizadorController {
 	@PutMapping("/editar/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	//@PreAuthorize("hasAnyAuthority('Editar_Senha_Usuarios')")
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Utilizador editarSenha(@PathVariable Long id,
 			@RequestBody EditarSenha usuario) {
 		try {

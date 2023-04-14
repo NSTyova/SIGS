@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class ServicoController {
 
 	//@PreAuthorize("isAuthenticated(EDITAR_UTILIZADOR)")
 	@GetMapping
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<ServicosDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,
 			@RequestParam int qtd) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
@@ -50,6 +52,7 @@ public class ServicoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Servicos adicionar(@RequestBody @Valid Servicos servicos) {
 		try {
 			return service.gravar(servicos);
@@ -60,6 +63,7 @@ public class ServicoController {
 
 	@PutMapping("/{depositoId}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Servicos atualizar(@PathVariable Long depositoId, @RequestBody Servicos servicos) {
 		try {
 			Servicos depositoActual = service.buscarOuFalhar(depositoId);
@@ -71,6 +75,7 @@ public class ServicoController {
 	}
 
 	@GetMapping("/{depositoId}")
+	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Servicos buscar(@PathVariable Long depositoId) {
 		return service.buscarOuFalhar(depositoId);
 	}
