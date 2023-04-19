@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,6 +41,9 @@ public class UtilizadorController {
 	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<UtilizadorDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,
 			@RequestParam int qtd) {
+		try {
+			
+		
 		Pageable paginacao = PageRequest.of(pagina, qtd);
 
 		if (nome == null) {
@@ -49,8 +53,10 @@ public class UtilizadorController {
 			Page<Utilizador> utilizador = service.buscarPorNome(paginacao, nome);
 			return UtilizadorDTO.convert(utilizador);
 		}
+	}catch (AccessDeniedException e) {
+        throw new AccessDeniedException("Acesso negado: você não possui as permissões necessárias.", e);
+    }
 	}
-
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
