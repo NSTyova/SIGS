@@ -10,13 +10,11 @@ import org.fao.service.DepositoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,12 +34,15 @@ public class DepositoController {
 	@Autowired
 	private DepositoService service;
 
+	
+	
+	
 	//@PreAuthorize("isAuthenticated(EDITAR_UTILIZADOR)")
 	@GetMapping
-	@Cacheable(value="listaDeposito") // CACHE DOS DADOS 
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public Page<DepositoDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,
-			@RequestParam int qtd) {
+	//@Cacheable(value="listaDeposito") // CACHE DOS DADOS 
+	//@PreAuthorize("hasRole('ROLE_grupo1')")
+	public Page<DepositoDTO> listar(@RequestParam(required = false) String nome, @RequestParam(defaultValue = "0") int pagina,
+			@RequestParam(defaultValue = "10") int qtd ) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
 
 		if (nome == null) {
@@ -57,7 +58,7 @@ public class DepositoController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@CacheEvict(value="listaDeposito", allEntries = true) // LIMPAR O CACHE DEPOIS DE UMA INSERCAO
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Deposito adicionar(@RequestBody @Valid Deposito deposito) {
 		try {
 			return service.gravar(deposito);
@@ -69,7 +70,7 @@ public class DepositoController {
 	@PutMapping("/{depositoId}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@CacheEvict(value="listaDeposito", allEntries = true) // LIMPAR O CACHE DEPOIS DE UMA INSERCAO
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Deposito atualizar(@PathVariable Long depositoId, @RequestBody Deposito deposito) {
 		try {
 			Deposito depositoActual = service.buscarOuFalhar(depositoId);
@@ -82,7 +83,7 @@ public class DepositoController {
 
 	// 
 	@GetMapping("/{depositoId}")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public ResponseEntity<Deposito> buscar(@PathVariable Long depositoId) {
 		Deposito deposito =	service.buscarOuFalhar(depositoId);
 		if(deposito == null) {

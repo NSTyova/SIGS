@@ -13,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +34,7 @@ public class TipoProductoController {
 
 	//@PreAuthorize("isAuthenticated(EDITAR_UTILIZADOR)")
 	@GetMapping
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<TipoProductoDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,
 			@RequestParam int qtd) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
@@ -52,7 +51,7 @@ public class TipoProductoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public TipoProductos adicionar(@RequestBody @Valid TipoProductos tipo) {
 		try {
 			return service.gravar(tipo);
@@ -63,7 +62,7 @@ public class TipoProductoController {
 
 	@PutMapping("/{tipoId}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public TipoProductos atualizar(@PathVariable Long tipoId, @RequestBody TipoProductos tipo) {
 		try {
 			TipoProductos tipoActual = service.buscarOuFalhar(tipoId);
@@ -75,7 +74,7 @@ public class TipoProductoController {
 	}
 
 	@GetMapping("/{tipoId}")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public TipoProductos buscar(@PathVariable Long tipoId) {
 		return service.buscarOuFalhar(tipoId);
 	}

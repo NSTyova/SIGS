@@ -1,5 +1,5 @@
 package org.fao.security;
-
+/*
 import java.util.Date;
 
 import org.fao.model.Utilizador;
@@ -60,3 +60,4 @@ public class TokenService {
 
  
 }
+*/

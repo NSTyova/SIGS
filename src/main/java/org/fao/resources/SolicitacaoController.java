@@ -28,8 +28,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,8 +53,8 @@ public class SolicitacaoController {
 	private JasperService serviceJ;
 	
 	@GetMapping
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public Page<SolicitacaoDTO> listar( @RequestParam int pagina, @RequestParam int qtd, @AuthenticationPrincipal Utilizador logado) {
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	public Page<SolicitacaoDTO> listar( @RequestParam int pagina, @RequestParam int qtd,  Utilizador logado) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
 			Page<Solicitacao> solicitacao = service.listar(paginacao);
 			return SolicitacaoDTO.convert(solicitacao);
@@ -65,8 +63,8 @@ public class SolicitacaoController {
 	}
 	
 	@GetMapping(value = "/aprovados")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public Page<SolicitacaoDTO> listarAprovados( @RequestParam int pagina, @RequestParam int qtd, @AuthenticationPrincipal Utilizador logado) {
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	public Page<SolicitacaoDTO> listarAprovados( @RequestParam int pagina, @RequestParam int qtd,  Utilizador logado) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
 			Page<Solicitacao> solicitacao = service.listarAprovados(paginacao);
 			return SolicitacaoDTO.convert(solicitacao);
@@ -85,8 +83,8 @@ public class SolicitacaoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public void adicionar(@RequestBody Solicitacao solicitacao, HttpServletResponse response, @AuthenticationPrincipal Utilizador
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	public void adicionar(@RequestBody Solicitacao solicitacao, HttpServletResponse response,  Utilizador
 				utilizador) throws JRException, IOException {
 		//PEGAR O UTILIZADOR LOGADO
 		solicitacao.setSolicitante(utilizador);
@@ -104,7 +102,7 @@ public class SolicitacaoController {
 	// CANCELAR UMA SOLICITACAO E SO MUDAR O ESTADO
 	@PutMapping("/cancelar/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Solicitacao alterarQTD(@PathVariable Long id, @RequestBody CancelarSolicitacao solicitacao) {
 		return null;
 		/*try {
@@ -123,9 +121,9 @@ public class SolicitacaoController {
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	//@PreAuthorize("hasAnyAuthority('Editar_Usuarios')")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Solicitacao atualizar(@PathVariable Long id, @RequestBody EditarSolicitacao editar,
-			@AuthenticationPrincipal Utilizador utilizador) {
+			 Utilizador utilizador) {
 		try {
 			editar.setAprovou(utilizador);
 			Solicitacao solicitacao = service.buscarOuFalhar(id);
@@ -139,13 +137,13 @@ public class SolicitacaoController {
 	
 	
 	@GetMapping("/{solicitacaoId}")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public List<ItemSolicitacao> buscar(@PathVariable List<Solicitacao> solicitacaoId) {
 		return service.buscarPorId(solicitacaoId);
 	}
 	
 	@GetMapping(value="solicitacao/{solicitacaoId}")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public List<ItemSolicitacao> buscarIdAprovados(@PathVariable List<Solicitacao> solicitacaoId) {
 		return service.buscarPorAprovados(solicitacaoId);
 	}
@@ -153,7 +151,7 @@ public class SolicitacaoController {
 	
 	// BUSCAR ESTADO EM INTERVALO DE DATAS
 	@GetMapping("/estado")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<Solicitacao> buscarPorEstadosDatas(
 			@RequestParam int pagina, @RequestParam int qtd,
 			@RequestParam String estado,

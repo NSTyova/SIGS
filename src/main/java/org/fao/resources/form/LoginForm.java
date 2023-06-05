@@ -1,5 +1,5 @@
 package org.fao.resources.form;
-
+/*
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 public class LoginForm {
@@ -31,3 +31,4 @@ public class LoginForm {
 	
 	
 }
+*/

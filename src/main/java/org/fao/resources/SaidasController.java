@@ -12,8 +12,6 @@ import org.fao.service.form.CancelarSaidas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,8 +52,8 @@ public class SaidasController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public void adicionar(@RequestBody Saidas saidas, HttpServletResponse response, @AuthenticationPrincipal Utilizador
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	public void adicionar(@RequestBody Saidas saidas, HttpServletResponse response,  Utilizador
 				utilizador) throws JRException, IOException {
 		//PEGAR O UTILIZADOR LOGADO
 		saidas.setUtlizador(utilizador);
@@ -73,7 +71,7 @@ public class SaidasController {
 	// CANCELAR UMA SOLICITACAO E SO MUDAR O ESTADO
 	@PutMapping("/cancelar/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Saidas alterarQTD(@PathVariable Long id, @RequestBody CancelarSaidas saidas) {
 		return null;
 		/*try {

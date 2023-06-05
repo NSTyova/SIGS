@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/payments")
 public class PaymentController {
 	
-	
+	/*
 	
 	@Value("${proxypay.apiKey}")
     private String apiKey;
     
     @Value("${proxypay.secretKey}")
-    private String secretKey;
+    private String secretKey;*/
 	/*
 	   @PostMapping("/create")
 	    public ResponseEntity<String> createPaymentTransaction(@RequestBody PaymentTransaction paymentTransaction) {

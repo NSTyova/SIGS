@@ -7,28 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
+/*
 @EnableWebSecurity
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	
 	
-
+	
 	@Autowired
 	private AutenticacaoService autenticacaoService;
 	
@@ -52,16 +41,26 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	
 	
 	// autorizacao
+	
+	protected void configure(HttpSecurity http) throws Exception {
+	    http.cors()
+	        .and()
+	        .authorizeHttpRequests()
+	        .anyRequest().permitAll() // Libera todos os endpoints
+	        .and()
+	        .csrf().disable();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors()
 		.and().authorizeRequests()
-				.antMatchers(HttpMethod.GET,"/tecnicos/**").hasAnyAuthority("Buscar_Tecnicos")
-				.antMatchers(HttpMethod.POST, "/auth").permitAll()
+				//.antMatchers(HttpMethod.GET,"/tecnicos/**").hasAnyAuthority("Buscar_Tecnicos")
+				.antMatchers(HttpMethod.GET, "/deposito").permitAll()
 				.anyRequest().authenticated()
-				.and().csrf().disable()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and().addFilterBefore(new AutenticacaoVaToken(tokenService, repository), UsernamePasswordAuthenticationFilter.class);
+				.and().csrf().disable();
+				//.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				//.and().addFilterBefore(new AutenticacaoVaToken(tokenService, repository), UsernamePasswordAuthenticationFilter.class);
 				//.exceptionHandling().accessDeniedHandler(new TratamentoErro403());;
 				
 	}
@@ -80,7 +79,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 		return source;
 	}
 	
-	
+	/*
 	public static void main(String[] args) {
 		System.out.println(new BCryptPasswordEncoder().encode("123456"));
 	}
@@ -90,4 +89,4 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	    return new BCryptPasswordEncoder();
 	}
 	
-}
+}*/

@@ -11,7 +11,6 @@ import org.fao.service.dash.DashGraficaService;
 import org.fao.service.projections.ProductoMaisSolicitados;
 import org.fao.service.projections.SolicitacoaQDT;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,20 +35,20 @@ public class GraficoDashController {
 	
 	
 	@GetMapping
-	public  List<SolicitacoaQDT> limitados(@AuthenticationPrincipal Utilizador logado){
+	public  List<SolicitacoaQDT> limitados( Utilizador logado){
 		// trazer
 		String utilizador = logado.getEmail();
 		return dashGraficaService.limitados(utilizador);
 	}
 	
 	@GetMapping(value="/solicitacao")
-	public  List<ProductoMaisSolicitados> productosMSolicitados(@AuthenticationPrincipal Utilizador logado){
+	public  List<ProductoMaisSolicitados> productosMSolicitados( Utilizador logado){
 		String utilizador = logado.getEmail();
 		return dashGraficaService.productosMSolicitados(utilizador);
 	}
 	
 	@GetMapping(value = "cards")
-	public CardsSaidaEntradaPaciente cards(@AuthenticationPrincipal Utilizador logado){
+	public CardsSaidaEntradaPaciente cards( Utilizador logado){
 		String utilizador = logado.getEmail();
 		 return dashGraficaService.card(utilizador);
 	}

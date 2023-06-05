@@ -1,5 +1,5 @@
 package org.fao.service;
-
+/*
 import org.fao.model.Permissao;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,3 +13,4 @@ public interface PermissaoService {
 	public Page<Permissao> listar(Pageable permisao);
 	public Page<Permissao>  buscarPorNome(Pageable paginacao,String nome);
 }
+*/

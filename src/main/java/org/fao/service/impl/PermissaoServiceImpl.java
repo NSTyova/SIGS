@@ -1,5 +1,5 @@
 package org.fao.service.impl;
-
+/*
 import org.fao.model.Permissao;
 import org.fao.service.PermissaoService;
 import org.springframework.data.domain.Page;
@@ -35,3 +35,4 @@ public class PermissaoServiceImpl implements PermissaoService{
 	}
 
 }
+*/

@@ -12,7 +12,6 @@ import org.fao.service.UtilizadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,12 +20,12 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 	@Autowired
 	private UtilizadorRepository repository;
 	
-	@Autowired
-	public PasswordEncoder passwordEncoder;
+	/*@Autowired
+	public PasswordEncoder passwordEncoder;*/
 
 	@Override
 	public Utilizador gravar(Utilizador u) {
-		u.setSenha(passwordEncoder.encode(u.getPassword()));
+		//u.setSenha(passwordEncoder.encode(u.getPassword()));
 		return repository.save(u);
 	}
 
@@ -53,10 +52,10 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 	public void alterarSenha(Long utId, String senhaActual, String novaSenha) {
 		// TODO Auto-generated method stub
 		Utilizador utilizador = buscarOuFalhar(utId);
-		if(!passwordEncoder.matches(senhaActual, utilizador.getPassword())) {
+		/*if(!passwordEncoder.matches(senhaActual, utilizador.getPassword())) {
 			//throw new Ne
 			// PASSAR AQUI UMA EXCPECAO PARA INFORMAR QUE AS SENHA NAO SAO IUGUAS
-		}
+		}*/
 		//utilizador.setSenha(passwordEncoder.encode(novaSenha));
 	}
 

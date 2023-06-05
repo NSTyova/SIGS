@@ -1,5 +1,5 @@
 package org.fao.security;
-
+/*
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -54,3 +54,4 @@ public class AutenticacaoVaToken extends OncePerRequestFilter {
 	}
 
 }
+*/

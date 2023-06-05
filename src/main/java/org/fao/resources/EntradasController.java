@@ -20,8 +20,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +46,7 @@ public class EntradasController {
 	
 	@GetMapping
 	@Cacheable(value="listaEntradas") // CACHE DOS DADOS 
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<EntradasDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,
 			@RequestParam int qtd) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
@@ -66,8 +64,8 @@ public class EntradasController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@Cacheable(value="listaEntradas") // CACHE DOS DADOS
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public void adicionar(@RequestBody Entradas entradas, HttpServletResponse response, @AuthenticationPrincipal Utilizador
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	public void adicionar(@RequestBody Entradas entradas, HttpServletResponse response,  Utilizador
 				utilizador) throws JRException, IOException {
 		//PEGAR O UTILIZADOR LOGADO
 		entradas.setUtilizador(utilizador);
@@ -85,8 +83,8 @@ public class EntradasController {
 	@PostMapping(value = "transferencia")
 	@ResponseStatus(HttpStatus.CREATED)
 	@CacheEvict(value="listaEntradas" , allEntries = true) // LIMPAR O CACHE DEPOIS DE UMA INSERCAO
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public void adicionarT(@RequestBody Entradas entradas, HttpServletResponse response, @AuthenticationPrincipal Utilizador
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	public void adicionarT(@RequestBody Entradas entradas, HttpServletResponse response,  Utilizador
 				utilizador) throws JRException, IOException {
 		//PEGAR O UTILIZADOR LOGADO
 		entradas.setUtilizador(utilizador);
@@ -103,7 +101,7 @@ public class EntradasController {
 	
 	@GetMapping("/{entradasId}")
 	@CacheEvict(value="listaEntradas" , allEntries = true) // LIMPAR O CACHE DEPOIS DE UMA INSERCAO
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Entradas buscar(@PathVariable Long entradasId) {
 		return service.buscarOuFalhar(entradasId);
 	}

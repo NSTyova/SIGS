@@ -1,5 +1,5 @@
 package org.fao.resources.DTO;
-
+/*
 import org.fao.model.Permissao;
 import org.springframework.data.domain.Page;
 
@@ -34,3 +34,4 @@ public class PermissaoDTO {
 	
 	
 }
+*/

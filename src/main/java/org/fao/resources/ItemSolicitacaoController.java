@@ -15,8 +15,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,9 +37,9 @@ public class ItemSolicitacaoController {
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public ItemSolicitacao remover(@PathVariable Long id, @RequestBody RemoverProducto remove,
-			@AuthenticationPrincipal Utilizador utilizador) {
+			 Utilizador utilizador) {
 		try {
 			remove.setUtilizador(utilizador);
 			ItemSolicitacao solicitacao = service.buscarOuFalhar(id);

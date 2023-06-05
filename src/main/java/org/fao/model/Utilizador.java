@@ -1,27 +1,17 @@
 package org.fao.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "tb_utilizador")
-public class Utilizador implements UserDetails{
+public class Utilizador /*implements UserDetails*/{
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -35,7 +25,7 @@ public class Utilizador implements UserDetails{
 	@Column(name = "estado_utilizador")
 	private boolean estado=true;
 
-	
+	/*
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Permissao> permissoes = new ArrayList<>();
 	@Override
@@ -72,7 +62,7 @@ public class Utilizador implements UserDetails{
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
-	}
+	}*/
 	public Long getId() {
 		return id;
 	}
@@ -104,12 +94,12 @@ public class Utilizador implements UserDetails{
 	public void setDataRegister(LocalDate dataRegister) {
 		this.dataRegister = dataRegister;
 	}
-	public List<Permissao> getPermissoes() {
+	/*public List<Permissao> getPermissoes() {
 		return permissoes;
 	}
 	public void setPermissoes(List<Permissao> permissoes) {
 		this.permissoes = permissoes;
-	}
+	}*/
 	public boolean isEstado() {
 		return estado;
 	}

@@ -15,9 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,9 +33,9 @@ public class UtilizadorController {
 
 	@Autowired
 	private UtilizadorService service;
-
+/*
 	@GetMapping
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<UtilizadorDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,
 			@RequestParam int qtd) {
 		try {
@@ -56,11 +53,11 @@ public class UtilizadorController {
 	}catch (AccessDeniedException e) {
         throw new AccessDeniedException("Acesso negado: você não possui as permissões necessárias.", e);
     }
-	}
+	}*/
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Utilizador adicionar(@RequestBody @Valid Utilizador utilizador) {
 		try {
 			return service.gravar(utilizador);
@@ -72,7 +69,7 @@ public class UtilizadorController {
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	//@PreAuthorize("hasAnyAuthority('Editar_Usuarios')")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Utilizador atualizar(@PathVariable Long id, @RequestBody EditarUsuario editarUsuario) {
 		try {
 			Utilizador usuariooAtual = service.buscarOuFalhar(id);
@@ -84,16 +81,16 @@ public class UtilizadorController {
 	}
 
 	@GetMapping("/{utilizdorId}")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Utilizador buscar(@PathVariable Long utilizdorId) {
 		return service.buscarOuFalhar(utilizdorId);
 	}
 	
-	@PutMapping("/editar/{id}")
-	@ResponseStatus(HttpStatus.ACCEPTED)
+	//@PutMapping("/editar/{id}")
+	//@ResponseStatus(HttpStatus.ACCEPTED)
 	//@PreAuthorize("hasAnyAuthority('Editar_Senha_Usuarios')")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public Utilizador editarSenha(@PathVariable Long id,
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	/*public Utilizador editarSenha(@PathVariable Long id,
 			@RequestBody EditarSenha usuario) {
 		try {
 			Utilizador usuarioAtual = service.buscarOuFalhar(id);
@@ -104,5 +101,5 @@ public class UtilizadorController {
 		} catch (UtilizadorNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage());
 		}
-	}
+	}*/
 }

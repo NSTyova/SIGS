@@ -25,8 +25,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,8 +51,8 @@ public class TransferenciaController {
 	private JasperService serviceJ;
 	
 	@GetMapping
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public Page<TransferenciaDTO> listar( @RequestParam int pagina, @RequestParam int qtd, @AuthenticationPrincipal Utilizador logado) {
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	public Page<TransferenciaDTO> listar( @RequestParam int pagina, @RequestParam int qtd,  Utilizador logado) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
 
 			Page<Transferencia> transferencia = service.listar(paginacao);
@@ -73,8 +71,8 @@ public class TransferenciaController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public void adicionar(@RequestBody Transferencia transferencia, HttpServletResponse response, @AuthenticationPrincipal Utilizador
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	public void adicionar(@RequestBody Transferencia transferencia, HttpServletResponse response,  Utilizador
 				utilizador) throws JRException, IOException {
 		//PEGAR O UTILIZADOR LOGADO
 		transferencia.setUtilizador(utilizador);
@@ -90,13 +88,13 @@ public class TransferenciaController {
 	}
 	
 	@GetMapping("/findBy/{id}")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Transferencia buscarPorId(@PathVariable Long id) {
 		return service.buscarOuFalhar(id);
 	}
 	
 	@GetMapping("/{tId}")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public List<ItemTransferencia> buscar(@PathVariable List<Transferencia> tId) {
 		return service.buscarPorId(tId);
 	}
@@ -104,7 +102,7 @@ public class TransferenciaController {
 	// CANCELAR UMA SOLICITACAO E SO MUDAR O ESTADO
 	@PutMapping("/cancelar/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Transferencia alterarQTD(@PathVariable Long id, @RequestBody CancelarSolicitacao transferencia) {
 		return null;
 		/*try {
@@ -121,7 +119,7 @@ public class TransferenciaController {
 	
 	// BUSCAR ESTADO EM INTERVALO DE DATAS
 	@GetMapping("/porDatas")
-	@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public List<Transferencia> buscarPorEstadosDatas(
 				@RequestParam int pagina, @RequestParam int qtd,
 				@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
