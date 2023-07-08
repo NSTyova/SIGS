@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,16 +34,15 @@ public class DepositoController {
 
 	@Autowired
 	private DepositoService service;
-
-	
-	
 	
 	//@PreAuthorize("isAuthenticated(EDITAR_UTILIZADOR)")
-	@GetMapping
+	//@GetMapping
 	//@Cacheable(value="listaDeposito") // CACHE DOS DADOS 
-	//@PreAuthorize("hasRole('ROLE_grupo1')")
+	//@PostAuthorize("hasRole('ROLE_administrador')")
+	//@PreAuthorize("hasRole('ROLE_group2')")
+	
 	public Page<DepositoDTO> listar(@RequestParam(required = false) String nome, @RequestParam(defaultValue = "0") int pagina,
-			@RequestParam(defaultValue = "10") int qtd ) {
+			@RequestParam(defaultValue = "5") int qtd ) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
 
 		if (nome == null) {
@@ -55,10 +55,21 @@ public class DepositoController {
 	}
 
 
+
+	//@PreAuthorize("hasRole('ROLE_Security')")
+	//@PreAuthorize("hasRole('api.scope_admin')")
+	
+	//@PreAuthorize("hasAnyAuthority('SCOPE_email')")
+	@GetMapping
+	public String index(Authentication user) {
+        return "Nome do utilizador Logado: " + user.getName();
+    }
+    
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@CacheEvict(value="listaDeposito", allEntries = true) // LIMPAR O CACHE DEPOIS DE UMA INSERCAO
-	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
+	///@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Deposito adicionar(@RequestBody @Valid Deposito deposito) {
 		try {
 			return service.gravar(deposito);

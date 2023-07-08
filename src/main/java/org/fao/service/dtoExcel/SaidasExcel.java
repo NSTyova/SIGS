@@ -11,7 +11,6 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.fao.model.ItemEntradas;
 import org.fao.model.ItemSaida;
 
 public class SaidasExcel {

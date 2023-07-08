@@ -3,8 +3,8 @@ package org.fao.resources;
 import javax.validation.Valid;
 
 import org.fao.model.TipoProductos;
-import org.fao.model.exception.TipoProductosNaoEncontradoException;
 import org.fao.model.exception.NegocioException;
+import org.fao.model.exception.TipoProductosNaoEncontradoException;
 import org.fao.resources.DTO.TipoProductoDTO;
 import org.fao.service.TipoProductoService;
 import org.springframework.beans.BeanUtils;
@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,14 +37,16 @@ public class TipoProductoController {
 	@GetMapping
 	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<TipoProductoDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,
-			@RequestParam int qtd) {
+			@RequestParam int qtd, Authentication user) {
 		Pageable paginacao = PageRequest.of(pagina, qtd);
 
 		if (nome == null) {
 			Page<TipoProductos> tipo = service.listar(paginacao);
+			//System.out.println("Nome do User Logado: " +user.getName());
 			return TipoProductoDTO.convert(tipo);
 		} else {
 			Page<TipoProductos> tipo = service.buscarPorNome(paginacao, nome);
+			
 			return TipoProductoDTO.convert(tipo);
 		}
 	}

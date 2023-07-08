@@ -2,10 +2,7 @@ package org.fao.service.impl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.fao.model.Utilizador;
-import org.fao.model.exception.UtilizadorNaoEncontradoException;
 import org.fao.repository.UtilizadorRepository;
 import org.fao.resources.form.EditarUsuario;
 import org.fao.service.UtilizadorService;
@@ -32,13 +29,13 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 	@Override
 	public Utilizador buscarOuFalhar(Long uId) {
 		// TODO Auto-generated method stub
-		return repository.findById(uId).orElseThrow(() -> new UtilizadorNaoEncontradoException(uId));
+		return null;
 	}
 
 	@Override
 	public Page<Utilizador> listar(Pageable paginacao) {
 		// TODO Auto-generated method stub
-		return repository.findAll(paginacao);
+		return null;
 	}
 
 	@Override
@@ -48,6 +45,42 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 	}
 
 	@Override
+	public void alterarSenha(Long utId, String senhaActual, String novaSenha) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Utilizador editar(Long id, EditarUsuario usuario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Utilizador> lista() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+/*	@Override
+	public Utilizador buscarOuFalhar(Long uId) {
+		// TODO Auto-generated method stub
+		return repository.findById(uId).orElseThrow(() -> new UtilizadorNaoEncontradoException(uId));
+	}*/
+/*
+	@Override
+	public Page<Utilizador> listar(Pageable paginacao) {
+		// TODO Auto-generated method stub
+		return repository.findAll(paginacao);
+	}*/
+/*
+	@Override
+	public Page<Utilizador> buscarPorNome(Pageable paginacao, String nome) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
+
+	/*@Override
 	@Transactional
 	public void alterarSenha(Long utId, String senhaActual, String novaSenha) {
 		// TODO Auto-generated method stub
@@ -57,9 +90,9 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 			// PASSAR AQUI UMA EXCPECAO PARA INFORMAR QUE AS SENHA NAO SAO IUGUAS
 		}*/
 		//utilizador.setSenha(passwordEncoder.encode(novaSenha));
-	}
+/*	}*/
 
-	@Override
+	/*@Override
 	public Utilizador editar(Long id, EditarUsuario usuarioEditar) {
 		Utilizador usuario =repository.getById(id);
 		usuarioEditar.setName(usuario.getName());
@@ -75,5 +108,5 @@ public class UtlizadorServiceImpl implements UtilizadorService{
 	public List<Utilizador> lista() {
 		// TODO Auto-generated method stub
 		return repository.findAll();
-	}
+	}*/
 }

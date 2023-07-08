@@ -2,24 +2,21 @@ package org.fao.resources;
 
 import java.io.IOException;
 
+import javax.persistence.Cacheable;
 import javax.servlet.http.HttpServletResponse;
 
-import org.fao.model.Deposito;
 import org.fao.model.Entradas;
-import org.fao.model.Estoque;
 import org.fao.model.Utilizador;
-import org.fao.resources.DTO.DepositoDTO;
 import org.fao.resources.DTO.EntradasDTO;
-import org.fao.resources.DTO.EstoqueDTO;
 import org.fao.resources.relatorios.JasperService;
 import org.fao.service.EntradaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +42,7 @@ public class EntradasController {
 	
 	
 	@GetMapping
-	@Cacheable(value="listaEntradas") // CACHE DOS DADOS 
+	//@Cacheable(value="listaEntradas") // CACHE DOS DADOS 
 	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
 	public Page<EntradasDTO> listar(@RequestParam(required = false) String nome, @RequestParam int pagina,
 			@RequestParam int qtd) {
@@ -63,16 +60,17 @@ public class EntradasController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	@Cacheable(value="listaEntradas") // CACHE DOS DADOS
+	//@Cacheable(value="listaEntradas") // CACHE DOS DADOS
 	//@PreAuthorize("hasAnyAuthority('Administrador', 'Gerente')")
-	public void adicionar(@RequestBody Entradas entradas, HttpServletResponse response,  Utilizador
-				utilizador) throws JRException, IOException {
+	public void adicionar(@RequestBody Entradas entradas, HttpServletResponse response,  Authentication user
+				) throws JRException, IOException {
 		//PEGAR O UTILIZADOR LOGADO
-		entradas.setUtilizador(utilizador);
+		//entradas.setUtilizador(user.getName());
+		entradas.setEmailUtilizador(user.getName());
 		//SALVAR O OBEJCTO
 		service.gravar(entradas);
 		// ACAO QUE RETORNO O PDF QUANDO FEITO A INVERSAO DE UM VALORES NO BANCO DE DADOS
-		serviceJ.addParams("idEntradas", entradas.getId());
+		//serviceJ.addParams("idEntradas", entradas.getId());
 		//byte[] bytes = serviceJ.exportPDSubF();
 		//response.setContentType(MediaType.APPLICATION_PDF_VALUE);
 		

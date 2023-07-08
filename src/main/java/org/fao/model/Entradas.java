@@ -33,6 +33,8 @@ public class Entradas {
 	@Transient
 	private Long transferencia;
 	
+	private String emailUtilizador;
+	
 	@ManyToOne
 	@JoinColumn(name = "utilizador")
 	private Utilizador utilizador;
@@ -100,6 +102,13 @@ public class Entradas {
 	}
 	public void setTransferencia(Long transferencia) {
 		this.transferencia = transferencia;
+	}
+	
+	public String getEmailUtilizador() {
+		return emailUtilizador;
+	}
+	public void setEmailUtilizador(String emailUtilizador) {
+		this.emailUtilizador = emailUtilizador;
 	}
 	
 }

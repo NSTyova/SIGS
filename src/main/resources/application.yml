@@ -1,0 +1,93 @@
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        provider:
+#          azure:
+#            issuer-uri: https://login.microsoftonline.com/a0a70b2c-dc9a-4b05-aeb0-f4ea14473036/v2.0
+#            user-name-attribute: name
+#        registration:
+#         azure-dev:
+#           provider: azure
+#             client-id: 8ae9c154-9ef8-4717-a606-195a825e1f75
+#             client-secret: 2is8Q~Iu9QUF.JsMHAlJ4tmUIAwt69g9xTuVXa6A 
+#             scope:
+#               - openid
+#               - email
+#               - profile
+
+
+
+# Group mapping
+#baeldung:
+#  jwt:
+#    authorization:
+#      group-to-authorities:
+#        "ca6fc4cf-9710-4004-b447-bb371d054f72": grup1
+#        "eaaecb69-ccbc-4143-b111-7dd1ce1d99f1": BAELDUNG_RO,BAELDUNG_ADMIN
+
+#spring:
+# cloud:
+#   azure:
+#     active-directory:
+#       enabled: true
+#       profile:
+#         tenant-id: a0a70b2c-dc9a-4b05-aeb0-f4ea14473036
+#       credential:
+#         client-id: 8ae9c154-9ef8-4717-a606-195a825e1f75
+#         client-secret: 2is8Q~Iu9QUF.JsMHAlJ4tmUIAwt69g9xTuVXa6A
+#       app-id-uri: https://sigeback.azurewebsites.net/
+#       authorization-clients:
+#         graph:
+#           scopes:
+#              - https://graph.microsoft.com/User.Read
+#
+## esta a funcionar este
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        provider:
+#          azure:
+#            issuer-uri: https://login.microsoftonline.com/a0a70b2c-dc9a-4b05-aeb0-f4ea14473036/v2.0
+#        registration:
+#         azure-dev:
+#            provider: azure
+#            client-id: 8ae9c154-9ef8-4717-a606-195a825e1f75
+#            client-secret: 2is8Q~Iu9QUF.JsMHAlJ4tmUIAwt69g9xTuVXa6A         
+#            scope:
+#            - openid
+#            - email
+#            - profile
+
+
+spring:
+ cloud:
+   azure:
+     active-directory:
+       enabled: true
+       profile:
+         tenant-id: a0a70b2c-dc9a-4b05-aeb0-f4ea14473036
+       credential:
+         client-id: 8ae9c154-9ef8-4717-a606-195a825e1f75
+         client-secret: 2is8Q~Iu9QUF.JsMHAlJ4tmUIAwt69g9xTuVXa6A
+
+
+
+
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        provider:
+#          azure:
+#            issuer-uri: https://login.microsoftonline.com/a0a70b2c-dc9a-4b05-aeb0-f4ea14473036/v2.0
+#        registration:
+#          azure-dev:
+#            provider: azure
+#            client-id: bfd574f7-00c8-46f6-8385-3da4bc01feaf
+#            client-secret: TSh8Q~ACyzcm2zZacdLVegI_PSFJ9N1LwIAEFdv5         
+#            scope:
+#            - openid
+#            - email
+#            - profile
